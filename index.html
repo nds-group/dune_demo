@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard - Dark Style</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <div class="content-area">
+        <div class="container-fluid">
+          <div class="text-right mt-3 mb-3 d-fixed">
+            <!-- There will be buttons here -->
+            <!-- <button id="toggleUpdate">No Inference</button>
+            <button id="toggleUpdate">Mousika</button>
+            <button id="toggleUpdate">Jewel</button> -->
+            <!-- <button id="toggleUpdate">DUNE</button> -->
+            <button id="toggleNoInference" class="default-button">NO INFERENCE</button>
+            <button id="toggleMousika" class="default-button">MOUSIKA</button>
+            <button id="toggleJewel" class="default-button">JEWEL</button>
+            <button id="toggleDune" class="default-button">DUNE</button>
+            
+            <div id="chartDune"></div>
+          </div>
+          <div class="main">
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="box columnbox mt-4" style="height: 420px;" title="Topology">
+                  <div id="columnchart"></div>
+                   <!-- Animation container -->
+                  <div id="animation-container" style="margin-top: 20px;">
+                    <iframe id="animation-frame" src="" width="100%" height="300" style="border:none;"></iframe>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="box  mt-4">
+                  <div id="linechart"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="box mt-4">
+                  <h2 class="chart-title">Performance</h2>
+                  <div class="mt-4">
+                    <div id="combinedPerformance"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="box mt-4">
+                  <h2 class="chart-title">Latency (ns)</h2>
+                  <div class="mt-4">
+                    <div id="noInference"></div>
+                  </div>
+                  <div class="mt-4">
+                    <div id="Mousika"></div>
+                  </div>
+                  <div class="mt-4">
+                    <div id="Jewel"></div>
+                  </div>
+                  <div class="mt-4">
+                    <div id="Dune"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="float-left IMDEA-logo">
+                <a
+                  target="_blank"
+                  ><img src="assets/IMDEA-logo.png" alt="IMDEA-logo"
+                /></a>
+              </div>
+              <div class="float-right SNS-6G">
+                <a
+                  target="_blank"
+                  ><img src="assets/6G-SNS.png" alt="SNS-6G"
+                /></a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="assets/scripts.js"></script>
+  </body>
+</html>
