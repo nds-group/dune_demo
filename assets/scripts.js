@@ -508,7 +508,7 @@ window.setInterval(function () {
 
 
   console.log("Script loaded");
-
+  
   if (typeof window.currentUpdater === 'undefined') {
     console.log("Initializing currentUpdater");
     window.currentUpdater = null;
@@ -574,7 +574,9 @@ window.setInterval(function () {
       showAnimation(window.currentPath);
       window.intervalId = setInterval(() => {
         // Stop if we reached end of data
-        if (window.noInferenceIndex >= window.noInferenceLatencyData.length) {
+        // if (window.noInferenceIndex >= window.noInferenceLatencyData.length) {
+          if (window.noInferenceIndex >= 60) {
+          showAnimation('');
           stopChartUpdate();
           return;
         }
@@ -597,8 +599,10 @@ window.setInterval(function () {
       window.intervalId = setInterval(() => {
         const now = new Date();
         // Stop if we reached end of data
-        if (window.jewelIndex >= window.jewelLatencyData.length) {
+        console.log(window.jewelPerfData['macro_overall'].length)
+        if (window.jewelIndex >= window.jewelPerfData['macro_overall'].length) {
           window.jewelIndex = 0;
+          showAnimation('');
           stopChartUpdate();
           return;
         }
@@ -661,8 +665,9 @@ window.setInterval(function () {
       window.intervalId = setInterval(() => {
       const now = new Date();
         // Stop if we reached end of data
-        if (window.duneIndex >= window.duneLatencyData.length) {
+        if (window.duneIndex >= window.dunePerfData['macro_overall'].length) {
           window.duneIndex = 0;
+          showAnimation('');
           stopChartUpdate();
           return;
         }
@@ -724,8 +729,9 @@ window.setInterval(function () {
       window.intervalId = setInterval(() => {
         const now = new Date();
         // Stop if we reached end of data
-        if (window.mousikaIndex >= window.mousikaLatencyData.length) {
+        if (window.mousikaIndex >= window.mousikaPerfData['macro_overall'].length) {
           window.mousikaIndex = 0
+          showAnimation('');
           stopChartUpdate();
           return;
         }
