@@ -26,27 +26,41 @@
     <div id="wrapper">
       <div class="content-area">
         <div class="container-fluid">
-          <div class="text-right mt-3 mb-3 d-fixed">
-            <!-- There will be buttons here -->
+          <!-- <div class="text-right mt-2 d-fixed">
             <button id="toggleNoInference" class="default-button">NO INFERENCE</button>
             <button id="toggleMousika" class="default-button">MOUSIKA</button>
             <button id="toggleJewel" class="default-button">JEWEL</button>
             <button id="toggleDune" class="default-button">DUNE</button>
-            <div id="chartDune"></div>
+          </div> -->
+          <div class="text-right mt-3 d-fixed">
+            <div class="d-inline-block text-center mr-3">
+              <button id="toggleNoInference" class="default-button">NO INFERENCE</button>
+              <div class="button-label">.<br>.</div>
+            </div>
+            <div class="d-inline-block text-center mr-3">
+              <button id="toggleMousika" class="default-button">MOUSIKA</button>
+              <div class="button-label">Packet-level <br> . </div>
+            </div>
+            <div class="d-inline-block text-center mr-2">
+              <button id="toggleJewel" class="default-button">JEWEL</button>
+              <div class="button-label">Joint packet <br> & flow-level</div>
+            </div>
+            <div class="d-inline-block text-center">
+              <button id="toggleDune" class="default-button">DUNE</button>
+              <div class="button-label">Distributed Joint <br>packet & flow-level</div>
+            </div>
           </div>
           <div class="main">
             <div class="row mt-4">
               <div class="col-md-6">
-                <div class="box columnbox mt-4" style="height: 420px;" title="Topology">
+                <div id="frame" class="box columnbox mt-4" style="height: 420px;" title="Topology">
                   <div id="columnchart"></div>
                    <!-- Animation container -->
-                  <div id="animation-container" style="margin-top: 20px;">
-                    <h2 class="chart-title">Topology</h2>
+                    <h2 class="chart-title">User Plane Topology</h2>
                     <iframe id="animation-frame" src="" width="100%" height="300" style="border:none;"></iframe>
-                  </div>
                 </div>
               </div>
-              <div class="col-md-6">
+              <div id="frame" class="col-md-6">
                 <div class="box  mt-4">
                   <div id="linechart"></div>
                 </div>
@@ -55,16 +69,16 @@
 
             <div class="row">
               <div class="col-md-6">
-                <div class="box mt-4">
-                  <h2 class="chart-title">Performance</h2>
+                <div id="frame" class="box mt-4">
+                  <h2 class="chart-title">Classification Accuracy</h2>
                   <div class="mt-4">
                     <div id="combinedPerformance"></div>
                   </div>
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="box mt-4">
-                  <h2 class="chart-title">Latency (ns)</h2>
+                <div id="frame" class="box mt-4">
+                  <h2 class="chart-title">Traffic Switching Latency (ns)</h2>
                   <div class="mt-4">
                     <div id="noInference"></div>
                   </div>
@@ -81,7 +95,7 @@
               </div>
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
               <div class="float-left IMDEA-logo">
                 <a
                   target="_blank"
@@ -94,9 +108,45 @@
                   ><img src="assets/6G-SNS.png" alt="SNS-6G"
                 /></a>
               </div>
-            </div>
+            </div> -->
+
+            <!-- <div class="row justify-content-between align-items-center px-3">
+              <div class="IMDEA-logo">
+                <img src="assets/IMDEA-logo.png" alt="IMDEA-logo"/>
+              </div>
+              <div class="EU">
+                <img src="assets/UE_Logo.png" alt="EU" />
+              </div>
+              <div class="SNS-6G">
+                <img src="assets/6G-SNS.png" alt="SNS-6G" />
+              </div>
+              <div class="Madrid-logo">
+                <img src="assets/Comunidad_de_Madrid_Logo.png" alt="Madrid-logo"/>
+              </div>
+            </div> -->
+
+            <div class="row justify-content-between align-items-center px-3">
+              <div class="logos-left">
+                <div class="IMDEA-logo">
+                  <img src="assets/IMDEA-logo.png" alt="IMDEA-logo"/>
+                </div>
+                <div class="EU">
+                  <img src="assets/UE_Logo.png" alt="EU" />
+                </div>
+              </div>
+              <div class="logos-right">
+                <div class="SNS-6G">
+                  <img src="assets/6G-SNS.png" alt="SNS-6G" />
+                </div>
+                <div class="Madrid-logo">
+                  <img src="assets/Comunidad_de_Madrid_Logo.png" alt="Madrid-logo"/>
+                </div>
+              </div>
+            </div>            
+            
 
           </div>
+        </div>
         </div>
       </div>
     </div>
