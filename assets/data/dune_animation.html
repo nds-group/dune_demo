@@ -252,7 +252,7 @@
                </g>
             </symbol>
          </defs>
-         <g id="switch-layer" transform="translate(67.647795,3.8892291)" style="stroke()">
+         <g id="switch-layer" transform="translate(67.647795,3.8892291)">
             <!-- Instance Switch A -->
             <g id="switch-a" transform="matrix(0.99992533,0,0,0.99992533,49.997341,39.998601)">
                <!-- Instance label -->
@@ -328,7 +328,6 @@
             'D': 8,
             'E': 8,
             'F': 8,
-
          };
 
          const animationDuration = 12000; // ms
@@ -679,13 +678,13 @@
                         // Use the offset that was committed upon entry
                         yOffset = committedOffsetY;
 
-                        // Perform MID-SWITCH classification logic (if applicable), but WITHOUT changing path
+                        // Perform MID-SWITCH classification logic (if applicable)
                         if (isClassificationSwitch && !packetIsClassified) {
                            // Determine the point at which classification visually happens
                            // Use midpoint for inference path, slightly after entry for forward path
                            const midProgressPoint = committedOffsetY === inferenceOffsetY ? // Check committed path!
                               (switchEntryAndExit[currentSwitchId].entry + switchEntryAndExit[currentSwitchId].exit) / 2 :
-                              (switchEntryAndExit[currentSwitchId].entry + 3); // Point for packets forced forward by threshold
+                              (switchEntryAndExit[currentSwitchId].entry + 1); // Point for packets forced forward by threshold
 
                            if (currentProgress >= midProgressPoint) {
                               // --- Classification happens here ---
