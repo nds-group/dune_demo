@@ -4,14 +4,25 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Jewel animation</title>
+   <title>JEWEL animation</title>
    <style>
+      /* set colors as vars */
+      :root {
+         --red: #cc5b06;
+         --blue: #0790eb;
+         --green: #8ac926;
+         --yellow: #ffca3a;
+         --purple: #914aee;
+         --class-A: var(--red);
+         --class-B: var(--blue);
+         --class-C: var(--purple);
+         --class-D: var(--yellow);
+      }
+
       body {
          font-family: sans-serif;
-         background-color: transparent;
-         padding: 20px;
-         overflow-x: hidden;
-         color: #ddd
+         background-color: #262d47;
+         overflow: hidden;
       }
 
       h1 {
@@ -21,12 +32,6 @@
 
       .network-diagram {
          position: relative;
-         max-width: 950px;
-         /* Ajustado para el ancho del SVG */
-         margin: 40px auto;
-         padding: 20px 0;
-         /* Damos altura explícita para contener el SVG y animaciones */
-         min-height: 300px;
       }
 
       #network-svg {
@@ -50,28 +55,8 @@
          stroke: #333;
          stroke-width: 1;
          /* Transición suave para el cambio de color */
-         transition: all 0.1s ease;
+         transition: fill 0.1s ease, transform 0.3s ease-in-out;
       }
-      .packet.pl-classified {
-         /* Color inicial antes de clasificación */
-         stroke: #333;
-         stroke-width: 2;
-         stroke-dasharray: 4, 2;
-      }
-      .packet.fl-classified {
-         /* Color inicial antes de clasificación */
-         stroke: #333;
-         stroke-width: 2px;
-      }
-
-      /* set colors as vars */
-      :root {
-         --red: #ff6c6c;
-         --blue: #7777fa;
-         --green: #78ff78;
-         --orange: #fccf7c;
-      }
-
 
       .packet.classified-A {
          fill: var(--red);
@@ -84,12 +69,12 @@
       }
 
       .packet.classified-C {
-         fill: var(--green);
+         fill: var(--purple);
          /* Verde */
       }
 
       .packet.classified-D {
-         fill: var(--orange);
+         fill: var(--yellow);
          /* Naranja */
       }
 
@@ -100,86 +85,141 @@
          overflow: hidden;
       }
 
-      span.flow-count {
-         font-weight: bold;
-         color: #ddd;
-         margin-left: 5px;
-      }
-
-      span.flow-classification-tag {
-
-         color: #ddd;
-         margin-left: 5px;
-         font-size: 0.8em;
-         padding: .2rem;
-      }
-
-      ul.flow-count-list {
-         display: grid;
-         grid-template-columns: 1fr 1fr 1fr;
-      }
-
-      ul.flow-count-list li {
-         display: flex;
-      }
-
-      span.flow-classification-tag.classified-A::after {
-         background-color: var(--red);
-         color: #fff;
-      }
-
-      span.flow-classification-tag.classified-B::after {
-         background-color: var(--blue);
-         color: #fff;
-      }
-
-      span.flow-classification-tag.classified-C::after {
-         background-color: var(--green);
-      }
-
-      span.flow-classification-tag.classified-D::after {
-         background-color: var(--orange);
-      }
-
-      span.flow-classification-tag::after {
-         height: 10px;
-         width: 10px;
-         content: " ";
-         display: inline-block;
-         margin-left: .5rem;
-      }
+      #switchC #rect4
    </style>
 
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
 </head>
 
 <body>
+   <h1>JEWEL</h1>
+   <div style="text-align: center; margin-bottom: 20px; display:none">
+      <button id="play-button" style="padding: 10px 20px; display: none;">Play</button>
+      <button id="pause-button" style="padding: 10px 20px;">Pause</button>
+  </div>
 
-   <h1>Jewel</h1>
+
    <!-- Contenedor Principal -->
    <div class="network-diagram">
 
       <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-      <svg width="897.83679" height="245.02551" viewBox="0 0 897.83679 245.02551"
+      <svg viewBox="0 0 897.83679 245.02551"
          aria-labelledby="diagramTitle diagramDesc" version="1.1" id="svg10" sodipodi:docname="switch.svg"
          inkscape:version="1.4 (e7c3feb100, 2024-10-09)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
          xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:xlink="http://www.w3.org/1999/xlink"
-         xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"
-         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cc="http://creativecommons.org/ns#"
-         xmlns:dc="http://purl.org/dc/elements/1.1/">
+         xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
          <sodipodi:namedview id="namedview10" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25"
             inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0"
-            inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.16125" inkscape:cx="345.74812"
-            inkscape:cy="124.43488" inkscape:window-width="1920" inkscape:window-height="1008" inkscape:window-x="0"
-            inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="layer2" />
+            inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="0.93804646" inkscape:cx="426.41811"
+            inkscape:cy="211.60999" inkscape:window-width="1745" inkscape:window-height="1020" inkscape:window-x="0"
+            inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="layer1" showguides="true">
+            <sodipodi:guide position="195.75405,114.15405" orientation="0,-1" id="guide22" inkscape:locked="false" />
+         </sodipodi:namedview>
          <defs id="defs7">
+            <inkscape:perspective sodipodi:type="inkscape:persp3d" inkscape:vp_x="977.89119 : 345.01219 : 1"
+               inkscape:vp_y="0 : 1000 : 0" inkscape:vp_z="1462.6256 : 383.67229 : 1"
+               inkscape:persp3d-origin="664.99065 : 74.375432 : 1" id="perspective12" />
             <linearGradient id="swatch11" inkscape:swatch="solid">
-               <stop style="stop-color:#acacac;stop-opacity:1;" offset="0" id="stop11" />
+               <stop style="stop-color:#777777;stop-opacity:1;" offset="0" id="stop11" />
             </linearGradient>
-            <symbol id="animated-switch-symbol" viewBox="0 0 180 70">
-               <title id="title1">Switch</title>
-               <!-- Estilos -->
-               <style id="style1">
+            <linearGradient inkscape:collect="always" xlink:href="#swatch11" id="linearGradient11" x1="-41.931332"
+               y1="41.009075" x2="84.185104" y2="41.009075" gradientUnits="userSpaceOnUse" />
+            <linearGradient inkscape:collect="always" xlink:href="#swatch11" id="linearGradient12"
+               gradientUnits="userSpaceOnUse" x1="-41.931332" y1="41.009075" x2="84.185104" y2="41.009075"
+               gradientTransform="translate(-20.667384,6.0279871)" />
+            <linearGradient inkscape:collect="always" xlink:href="#swatch11" id="linearGradient13"
+               gradientUnits="userSpaceOnUse" gradientTransform="translate(-19.223114,69.488021)" x1="-41.931332"
+               y1="41.009075" x2="84.185104" y2="41.009075" />
+            <linearGradient inkscape:collect="always" xlink:href="#swatch11" id="linearGradient14"
+               gradientUnits="userSpaceOnUse" gradientTransform="translate(241.70261,66.904598)" x1="-41.931332"
+               y1="41.009075" x2="84.185104" y2="41.009075" />
+            <linearGradient inkscape:collect="always" xlink:href="#swatch11" id="linearGradient15"
+               gradientUnits="userSpaceOnUse" gradientTransform="translate(238.53606,4.3057051)" x1="-41.931332"
+               y1="41.009075" x2="84.185104" y2="41.009075" />
+            <linearGradient inkscape:collect="always" xlink:href="#swatch11" id="linearGradient16"
+               gradientUnits="userSpaceOnUse" gradientTransform="translate(518.40689,3.4445641)" x1="-41.931332"
+               y1="41.009075" x2="84.185104" y2="41.009075" />
+            <linearGradient inkscape:collect="always" xlink:href="#swatch11" id="linearGradient17"
+               gradientUnits="userSpaceOnUse" gradientTransform="translate(497.7395,2.5834231)" x1="-41.931332"
+               y1="41.009075" x2="84.185104" y2="41.009075" />
+            <symbol id="g10">
+
+               <style>
+                  /* Define fill using CSS variables with defaults */
+                  /* Add a common class for other styling if needed */
+                  .table-rect-common {
+                     opacity: 0.860725;
+                     stroke: none;
+                     stroke-width: 0.331272;
+                     stroke-linecap: round;
+                     stroke-linejoin: round;
+                     stroke-dasharray: 0.331272, 0.993814;
+                     stroke-dashoffset: 0.331272;
+                     stroke-opacity: 0.890196;
+                     paint-order: fill markers stroke;
+                  }
+
+                  /* Target specific rects by ID and set their fill variable */
+                  #symbol-tableA {
+                     fill: var(--table-a-fill, white);
+                  }
+
+                  #symbol-tableB {
+                     fill: var(--table-b-fill, white);
+                  }
+
+                  #symbol-tableC {
+                     fill: var(--table-c-fill, white);
+                  }
+               </style>
+
+               <g id="g7" inkscape:label="simpleSwitch">
+                  <rect
+                     style="opacity:0.860725;fill:#b3b3b3;stroke:#000000;stroke-width:3.0164;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.890196;paint-order:fill markers stroke"
+                     id="rect3" width="196.99854" height="87.933403" x="629.01556" y="154.30424" rx="4.4060531"
+                     ry="8.2601871" inkscape:label="switchContainer" />
+                  <rect
+                     style="opacity:0.860725;stroke:none;stroke-width:0.331272;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.331272, 0.993814;stroke-dashoffset:0.331272;stroke-opacity:0.890196;paint-order:fill markers stroke;
+                        display:var(--show-registers, inline);"
+                     id="symbol-tableA" class="table-rect-common" width="10.09952" height="7.6979146" x="635.21362"
+                     y="162.73387" rx="1.029658" ry="0.4263173" inkscape:label="tableA" />
+                  <rect
+                     style="opacity:0.860725;stroke:none;stroke-width:0.331272;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.331272, 0.993814;stroke-dashoffset:0.331272;stroke-opacity:0.890196;paint-order:fill markers stroke;
+                        display:var(--show-registers, inline);"
+                     id="symbol-tableB" class="table-rect-common" inkscape:label="tableB" width="10.09952"
+                     height="7.6979146" x="635.21362" y="172.84349" rx="1.029658" ry="0.4263173" />
+                  <rect
+                     style="opacity:0.860725;stroke:none;stroke-width:0.331272;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.331272, 0.993814;stroke-dashoffset:0.331272;stroke-opacity:0.890196;paint-order:fill markers stroke;
+                        display:var(--show-registers, inline);"
+                     id="symbol-tableC" class="table-rect-common" width="10.09952" height="7.6979146" x="635.21362"
+                     y="183.21252" rx="1.029658" ry="0.4263173" inkscape:label="tableC" />
+                  <rect
+                     style="opacity:0.860725;fill:var(--yellow);stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2, 6;stroke-dashoffset:2;stroke-opacity:0.890196;paint-order:fill markers stroke;
+                        display:var(--show-inference, inline);"
+                     id="rect4" width="115.02833" height="29.871696" x="680.36133" y="163.17972" rx="4" ry="4"
+                     inkscape:label="inferenceBlock" />
+                  <rect
+                     style="opacity:0.860725;fill:var(--green);stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2, 6;stroke-dashoffset:2;stroke-opacity:0.890196;paint-order:fill markers stroke"
+                     id="rect5" width="115.02833" height="29.871696" x="680.36133" y="204.50464" rx="4" ry="4"
+                     inkscape:label="forwardBlock" />
+                  <text xml:space="preserve"
+                     style="font-size:21.3333px;font-family:arial;-inkscape-font-specification:arial;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;opacity:0.860725;fill:#ffcc00;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.581339;paint-order:fill markers stroke"
+                     x="692.9364" y="227.30197" id="text7" inkscape:label="forwardLabel">
+                     <tspan sodipodi:role="line" id="tspan7" x="692.9364" y="227.30197"
+                        style="font-size:21.3333px;fill:#000000">Forward</tspan>
+                  </text>
+                  <text xml:space="preserve"
+                     style="font-size:21.3333px;font-family:arial;-inkscape-font-specification:arial;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;opacity:0.860725;fill:#ffcc00;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.581339;paint-order:fill markers stroke;
+                     display:var(--show-inference, inline);"
+                     x="693.25" y="185.27081" id="text7-3" inkscape:label="inferenceLabel">
+                     <tspan sodipodi:role="line" id="tspan7-6" x="693.25" y="185.27081"
+                        style="font-size:21.3333px;fill:#000000">Inference</tspan>
+                  </text>
+               </g>
+            </symbol>
+            <symbol id="animated-switch-symbol">
+               <title id="title2">Switch</title>
+               <style id="style2">
                   @keyframes blinkSlowAnim {
 
                      0%,
@@ -243,115 +283,141 @@
                      text-anchor: start;
                   }
                </style>
-               <!-- Cuerpo principal del switch -->
-               <rect class="switch-body" x="5" y="10" width="170" height="50" rx="4" ry="4" id="rect1" />
-               <!-- Zona de puertos y LEDs -->
-               <g id="symbol-port-area">
+               <rect class="switch-body" x="5" y="10" width="170" height="50" rx="4" ry="4" id="rect2" />
+               <g id="g11" inkscape:label="g11">
                   <!-- LEDs -->
-                  <circle class="led led-on" cx="27.5" cy="20" r="2.5" id="circle1" />
                   <!-- Puerto 1 -->
-                  <circle class="led led-off" cx="47.5" cy="20" r="2.5" id="circle2" />
                   <!-- Puerto 2 -->
-                  <circle class="led led-off" cx="67.5" cy="20" r="2.5" id="circle3" />
                   <!-- Puerto 3 -->
-                  <circle class="led led-on" cx="87.5" cy="20" r="2.5" id="circle4" />
+                  <g id="g40" inkscape:label="leds" transform="translate(-10,22)" style="display:inline">
+                     <circle class="led led-on" cx="27.5" cy="20" r="2.5" id="circle5" style="display:none" />
+                     <circle class="led led-off" cx="47.5" cy="20" r="2.5" id="circle6" style="display:none" />
+                     <circle class="led led-off" cx="67.5" cy="20" r="2.5" id="circle7" style="display:none" />
+                     <circle class="led led-on" cx="87.5" cy="20" r="2.5" id="circle8" style="display:none" />
+                     <circle class="led led-on" cx="178.90355" cy="-6.5233498" r="2.5" id="circle42" />
+                  </g>
                   <!-- Puerto 4 -->
                   <!-- Puertos RJ45 -->
-                  <rect class="port" x="20" y="28" width="15" height="22" rx="1.5" ry="1.5" id="rect4" />
-                  <rect class="port" x="40" y="28" width="15" height="22" rx="1.5" ry="1.5" id="rect5" />
-                  <rect class="port" x="60" y="28" width="15" height="22" rx="1.5" ry="1.5" id="rect6" />
-                  <rect class="port" x="80" y="28" width="15" height="22" rx="1.5" ry="1.5" id="rect7" />
+                  <g id="g41" inkscape:label="inference-block">
+                     <path
+                        style="display:none;opacity:0.860725;fill:none;fill-opacity:1;stroke:#d3d2b9;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.890196;paint-order:fill markers stroke"
+                        d="M 16.35184,45.66341 C 17.109564,34.50745 22.229009,26.173781 30.6297,19.96327 h 53.99626 c 8.694015,6.753331 10.838061,16.372273 12.46068,26.21934"
+                        id="path42" sodipodi:nodetypes="cccc" inkscape:label="inference-path" />
+                     <rect
+                        style="opacity:0.860725;fill:#ffcc00;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.581339;paint-order:fill markers stroke"
+                        id="rect40-6" width="55" height="13.175277" x="30.537067" y="13.994616" rx="6.2733111"
+                        ry="0.89086002" inkscape:label="inference-block-label" />
+                     <text xml:space="preserve"
+                        style="font-size:8px;font-family:arial;-inkscape-font-specification:arial;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;opacity:0.860725;fill:#ffcc00;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.581339;paint-order:fill markers stroke"
+                        x="41.152302" y="23.447489" id="text41">
+                        <tspan sodipodi:role="line" id="tspan41" x="41.152302" y="23.447489"
+                           style="font-size:8px;fill:#000000">Inference</tspan>
+                     </text>
+                  </g>
+                  <g id="g42" inkscape:label="fordwarding-block">
+                     <path
+                        style="display:inline;opacity:0.860725;fill:none;fill-opacity:1;stroke:#d3d2b9;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.888787;paint-order:fill markers stroke"
+                        d="M 16.180276,45.044705 C 16.938,33.888745 30.659739,35.169404 30.458136,35.199773 h 53.99626 c 0,0 10.83806,0.517065 12.46068,10.364132"
+                        id="path42-5" sodipodi:nodetypes="cccc" inkscape:label="fordwarding-path" />
+                     <rect
+                        style="opacity:0.860725;fill:#6ed371;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.581339;paint-order:fill markers stroke"
+                        id="rect40" width="55" height="13.175277" x="30.341879" y="28.784266" rx="6.2733111"
+                        ry="0.89086002" inkscape:label="fordwarding-block-label" />
+                     <text xml:space="preserve"
+                        style="font-size:8px;font-family:arial;-inkscape-font-specification:arial;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;opacity:0.860725;fill:#ffcc00;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.581339;paint-order:fill markers stroke"
+                        x="40.908287" y="38.188309" id="text41-7">
+                        <tspan sodipodi:role="line" id="tspan41-5" x="40.908287" y="38.188309"
+                           style="font-size:8px;fill:#000000">Fordward</tspan>
+                     </text>
+                  </g>
+                  <g id="g39" inkscape:label="ports" transform="translate(-10,18)">
+                     <rect class="port" x="19.921856" y="27.921856" width="15.031258" height="10.374435" rx="1.5031258"
+                        ry="0.70734781" id="rect8" />
+                     <rect class="port" x="39.963531" y="27.921856" width="15.031258" height="10.374435" rx="1.5031258"
+                        ry="0.70734781" id="rect9" />
+                     <rect class="port" x="60.005211" y="27.921856" width="15.031258" height="10.374435" rx="1.5031258"
+                        ry="0.70734781" id="rect10" />
+                     <rect class="port" x="80.04689" y="27.921856" width="15.031258" height="10.374435" rx="1.5031258"
+                        ry="0.70734781" id="rect11" />
+                     <rect class="port" x="99.21933" y="27.921619" width="15.031258" height="10.374435" rx="1.5031258"
+                        ry="0.70734781" id="rect11-3" style="fill:#282828;stroke:#555555;stroke-width:0.5"
+                        inkscape:label="rect12" />
+                  </g>
                </g>
-               <!-- Etiqueta del switch dentro del símbolo -->
-               <g id="symbol-label-area">
-                  <text class="label-text" x="115" y="40" id="text7">SwitchP4</text>
+               <g id="g12" transform="translate(0,14)">
+                  <text class="label-text" x="115" y="40" id="text11" inkscape:label="P4Label">SwitchP4</text>
                </g>
             </symbol>
-            <linearGradient inkscape:collect="always" xlink:href="#swatch11" id="linearGradient11" x1="-41.931332"
-               y1="41.009075" x2="84.185104" y2="41.009075" gradientUnits="userSpaceOnUse" />
-            <linearGradient inkscape:collect="always" xlink:href="#swatch11" id="linearGradient12"
-               gradientUnits="userSpaceOnUse" x1="-41.931332" y1="41.009075" x2="84.185104" y2="41.009075"
-               gradientTransform="translate(-20.667384,6.0279871)" />
-            <linearGradient inkscape:collect="always" xlink:href="#swatch11" id="linearGradient13"
-               gradientUnits="userSpaceOnUse" gradientTransform="translate(-19.223114,69.488021)" x1="-41.931332"
-               y1="41.009075" x2="84.185104" y2="41.009075" />
-            <linearGradient inkscape:collect="always" xlink:href="#swatch11" id="linearGradient14"
-               gradientUnits="userSpaceOnUse" gradientTransform="translate(241.70261,66.904598)" x1="-41.931332"
-               y1="41.009075" x2="84.185104" y2="41.009075" />
-            <linearGradient inkscape:collect="always" xlink:href="#swatch11" id="linearGradient15"
-               gradientUnits="userSpaceOnUse" gradientTransform="translate(238.53606,4.3057051)" x1="-41.931332"
-               y1="41.009075" x2="84.185104" y2="41.009075" />
-            <linearGradient inkscape:collect="always" xlink:href="#swatch11" id="linearGradient16"
-               gradientUnits="userSpaceOnUse" gradientTransform="translate(518.40689,3.4445641)" x1="-41.931332"
-               y1="41.009075" x2="84.185104" y2="41.009075" />
-            <linearGradient inkscape:collect="always" xlink:href="#swatch11" id="linearGradient17"
-               gradientUnits="userSpaceOnUse" gradientTransform="translate(497.7395,2.5834231)" x1="-41.931332"
-               y1="41.009075" x2="84.185104" y2="41.009075" />
          </defs>
-         <g id="switch-layer" transform="translate(41.931325,3.8892291)" sodipodi:insensitive="true">
+         <g id="switch-layer" transform="translate(67.647795,3.8892291)">
             <!-- Instancia Switch A -->
-            <g id="switch-a" transform="translate(50,40)">
-               <use href="#animated-switch-symbol" width="180" height="70" id="use7" style="fill:#666666" />
+            <g id="switch-a" transform="matrix(0.99992533,0,0,0.99992533,49.997341,39.998601)">
                <!-- Etiqueta específica para esta instancia -->
-               <text x="90" y="-10" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px" fill="#ddd"
-                  id="switch-label-a" data-name="Switch A">Switch A</text>
-               <text x="90" y="2" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px" fill="#ddd"
-                  id="status-label-a" data-name="Switch A">Forwarding</text>
+               <use xlink:href="#g10" id="switchA" transform="translate(-663.1128,-119.64015)" 
+                  inkscape:label="switchA" />
+               <text x="63.743423" y="10.844433" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px"
+                  fill="#dddddd" id="switch-label-a" data-name="Switch A" style="font-size:16.0012px">Switch A</text>
             </g>
             <!-- Instancia Switch B -->
-            <g id="switch-b" transform="translate(310,40)">
-               <use href="#animated-switch-symbol" width="180" height="70" id="use8" />
+            <g id="switch-b" transform="translate(291.32041,65.942477)">
                <!-- Etiqueta específica para esta instancia -->
-               <text x="90" y="-10" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px" fill="#ddd"
-                  id="switch-label-b" data-name="Switch B">Switch B</text>
-               <text x="90" y="2" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px" fill="#ddd"
-                  id="status-label-b" data-name="Switch A">Forwarding</text>
+               <text x="89.619743" y="-15.099602" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px"
+                  fill="#dddddd" id="switch-label-b" data-name="Switch B" style="font-size:16px">Switch B</text>
+               <use xlink:href="#g10" id="switchB" transform="translate(-637.56464,-145.5899)"
+                  style="--show-inference: none; --show-registers: none;"
+                  inkscape:label="switchB" />
             </g>
             <!-- Instancia Switch C -->
-            <g id="switch-c" transform="translate(570,40)">
-               <use href="#animated-switch-symbol" width="180" height="70" id="use9" />
+            <g id="switch-c" transform="translate(570,65.942477)">
                <!-- Etiqueta específica para esta instancia -->
-               <text x="90" y="-10" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px" fill="#ddd"
-                  id="switch-label-c" data-name="Switch C">Switch C</text>
-                  <text x="90" y="2" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px" fill="#ddd"
-                  id="status-label-c" data-name="Switch A">Forwarding</text>
+               <text x="77.726685" y="-15.099602" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px"
+                  fill="#dddddd" id="switch-label-c" data-name="Switch C" style="font-size:16px">Switch C</text>
+               <use xlink:href="#g10" id="switchC" transform="translate(-649.37566,-145.5899)"
+                  style="--show-inference: none; --show-registers: none"
+                  inkscape:label="swithcC" />
             </g>
          </g>
          <g inkscape:groupmode="layer" id="layer1" inkscape:label="Cable layer"
-            transform="translate(41.931325,3.8892291)" sodipodi:insensitive="true">
+            transform="translate(41.931325,3.8892291)">
             <path
                style="opacity:0.9;fill:none;fill-opacity:1;stroke:url(#linearGradient13);stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-               d="m 336.42813,80.110771 c -96.12434,28.911029 -197.2013,0 -197.2013,0" id="cable-a-b"
-               inkscape:label="CableA-B" sodipodi:nodetypes="cc" />
-            <path
-               style="opacity:0.9;fill:none;fill-opacity:1;stroke:url(#linearGradient11);stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-               d="m -59.663527,-10.812787 c 0.684884,73.779048 80.533901,89.416242 137.732202,90.923558" id="cable-0"
-               inkscape:label="Cable0" sodipodi:nodetypes="ccc" />
+               d="M 310.43104,124.11077 H 235.8953" id="cable-a-b" inkscape:label="CableA-B" sodipodi:nodetypes="cc" />
             <path
                style="opacity:0.9;fill:none;fill-opacity:1;stroke:url(#linearGradient14);stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-               d="m 597.35386,80.110771 c -96.12434,28.911029 -197.2013,0 -197.2013,0" id="cable-b-c"
-               inkscape:label="CableB-C" sodipodi:nodetypes="cc" />            
+               d="M 580.60558,124.11077 H 503.68785" id="cable-b-c" inkscape:label="CableB-C" sodipodi:nodetypes="cc" />
             <path
-               style="opacity:0.9;fill:none;fill-opacity:1;stroke:url(#linearGradient16);stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke;marker-end:url(#Square)"
-               d="m 858.06867,191.11077 h -170 c -30.70975,0 -31.00775,-2.22373 -30,-110.999999" id="cable-d-out"
-               inkscape:label="CableD-out" sodipodi:nodetypes="cssc" />
+               style="opacity:0.9;fill:none;fill-opacity:1;stroke:url(#linearGradient16);stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Square);paint-order:fill markers stroke"
+               d="m 862.42127,124.61265 -89.93622,-1.00376" id="cable-d-out" inkscape:label="CableC-out"
+               sodipodi:nodetypes="cc" />
+            <path
+               style="opacity:0.9;fill:#4d4d4d;fill-opacity:1;stroke:url(#linearGradient11);stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+               d="m -58.895148,124.11077 102.092771,0" id="cable-0" inkscape:label="Cable0" sodipodi:nodetypes="cc" />
          </g>
          <g inkscape:groupmode="layer" id="layer2" inkscape:label="PackagePath">
             <path
-               style="opacity:0;fill:none;fill-opacity:1;stroke:#ff8916;stroke-width:7.55906;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.581339;paint-order:fill markers stroke"
-               d="m -20.703234,-8.1783733 c 0,0 2.700242,57.0377453 60.109076,78.0676993 45.357179,16.615202 97.410288,15.284852 120.063318,14.124903 30.52337,-1.562951 66.5507,13.609606 130.97861,12.506562 53.47411,-0.915507 58.18077,-6.899692 88.64104,-11.823772 38.5268,-6.228083 51.93637,-3.540813 91.97809,5.742991 51.54736,11.95143 125.22127,6.726674 172.47677,-7.433216 5.13454,-1.53854 14.6682,2.820267 24.32593,-2.729014 18.986,-10.909253 19.35156,-44.178913 26.39407,-42.3379 9.58364,2.5053 5.84785,50.795438 5.84785,59.582036 0,101.303614 -1.62452,97.615654 40.68643,97.615654 64.17377,0 157.11118,-0.45036 157.11118,-0.45036"
-               id="path-class-D" inkscape:label="classD" sodipodi:nodetypes="csssssssc" />
+               style="display:none;opacity:0.718;fill:none;fill-opacity:1;stroke:var(--red);stroke-width:4;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.969157;paint-order:fill markers stroke"
+               d="m -17.810889,126.82123 921.524859,0.78692" id="package-path" inkscape:label="classD"
+               sodipodi:nodetypes="cc" />
          </g>
-
          <!-- Capa para los paquetes animados (DEBE ESTAR DESPUÉS para verse encima) -->
          <g id="packet-layer" transform="translate(0,0)">
             <!-- Los paquetes se añadirán aquí dinámicamente -->
          </g>
       </svg>
+
+
+
+
    </div>
 
    <script>
+
+
+
       document.addEventListener('DOMContentLoaded', function () {
+
+         let activePacketAnimations = [];
+         let isPaused = false;
 
          const svg = document.getElementById('network-svg');
          const packetLayer = document.getElementById('packet-layer');
@@ -359,265 +425,425 @@
 
          const packetClasses = ['A', 'B', 'C'];
          const packetDistributionConfig = {
-            'A': 33, 
-            'B': 33,
-            'C': 33,
-            //'D': 20
+            'A': 40,
+            'B': 30,
+            'C': 30,
          };
-         const animationDuration = 12000;
-         const minInterval = 800;
-         const maxInterval = 1200;
-         const packetHeight = 12;
-         const minPacketWidth = 15;
-         const maxPacketWidth = 35;
-         const hideZones = [
-               { switch: 'switch-a', entryProgress: 16.5, exitProgress: 22 },
-               { switch: 'switch-b', entryProgress: 39, exitProgress: 45 },
-               { switch: 'switch-c', entryProgress: 62.2, exitProgress: 73.5 }
-               ];
 
+         const animationDuration = 12000; // ms
+         const minInterval = 800;   // ms
+         const maxInterval = 1400;  // ms
+         const packetHeight = 12;
+         const minPacketWidth = 12;
+         const maxPacketWidth = 20;
+         const inferenceOffsetY = -25;
+         const forwardOffsetY = 20;
+
+         const classificationCounts = {
+            'A': 0,
+            'B': 0,
+            'C': 0
+         };
+
+         const switchEntryAndExit = {
+            'switch-a': { entry: 15, exit: 29 },
+            'switch-b': { entry: 43, exit: 57 },
+            'switch-c': { entry: 72, exit: 86 }
+         };
+
+         const classToTableLabel = {
+            'A': 'tableA',
+            'B': 'tableB',
+            'C': 'tableC'
+         };
+
+         const classifyThreshold = 4;
          const classConfig = {
             'A': {
-               pathId: 'path-class-D',
-               switchId: 'switch-a',
-               classificationProgress: 21,
                colorClass: 'classified-A',
-               hideZones: hideZones,
-               labelId: 'status-label-a'
+               classifyThreshold: classifyThreshold,
+               behavior: {
+                  'switch-a': { action: 'inference' },
+                  'switch-b': { action: 'forward' },
+                  'switch-c': { action: 'forward' }
+               },
+               classificationSwitch: 'switch-a'
             },
             'B': {
-               pathId: 'path-class-D',
-               switchId: 'switch-a',
-               classificationProgress: 21,
                colorClass: 'classified-B',
-               hideZones: hideZones,
-               labelId: 'status-labela'
+               classifyThreshold: classifyThreshold,
+               behavior: {
+                  'switch-a': { action: 'inference' },
+                  'switch-b': { action: 'forward' },
+                  'switch-c': { action: 'forward' }
+               },
+               classificationSwitch: 'switch-a'
             },
             'C': {
-               pathId: 'path-class-D',
-               switchId: 'switch-a',
-               classificationProgress: 21,
                colorClass: 'classified-C',
-               hideZones: hideZones,
-               labelId: 'status-label-a'
-            },
-            'D': {
-               pathId: 'path-class-D',
-               switchId: 'switch-c',
-               classificationProgress: 63,
-               colorClass: 'classified-D',
-               hideZones: hideZones,
-               labelId: 'status-label-c'
+               classifyThreshold: classifyThreshold,
+               behavior: {
+                  'switch-a': { action: 'inference' },
+                  'switch-b': { action: 'forward' },
+                  'switch-c': { action: 'forward' }
+               },
+               classificationSwitch: 'switch-a'
             }
          };
 
-         const packagesFlowClassMap = {
-            'A': ['a', 'e', 'i'],
-            'B': ['b', 'f', 'j'],
-            'C': ['c', 'g', 'k'],
-            'D': ['d', 'h', 'l']
-         };
-
-         const flowClassificationCount = {};
-
-         // Inicializa el contador para cada flowId
-         Object.keys(packagesFlowClassMap).forEach(packetClass => {
-            packagesFlowClassMap[packetClass].forEach(flowId => {
-               flowClassificationCount[flowId] = 0;
-            });
-         });
-
-         function scheduleNextPacket() {
-            // only schedule next packet if the amount of animated packages is less than 15
-
-            const animatedPackets = packetLayer.querySelectorAll('g');
-            if (animatedPackets.length >= 15) {
-               console.warn("Demasiados paquetes animados (" + animatedPackets.length + "). Esperando...");
-               setTimeout(scheduleNextPacket, 1000);
-               return;
-            }
-
-            const randomInterval = minInterval + Math.random() * (maxInterval - minInterval);
-            setTimeout(createAndAnimatePacket, randomInterval);
-         }
+         const mainPathId = 'package-path';
 
          function getRandomClassWithDistribution() {
             const rand = Math.random() * 100;
             let cumulativePercentage = 0;
+            const validClasses = Object.keys(packetDistributionConfig).filter(key => packetDistributionConfig[key] > 0);
+            const totalPercentage = validClasses.reduce((sum, key) => sum + packetDistributionConfig[key], 0);
 
-            // Verifica que los porcentajes sumen (aproximadamente) 100 - opcional pero recomendado
-            const totalPercentage = Object.values(packetDistributionConfig).reduce((sum, p) => sum + p, 0);
-            if (Math.abs(totalPercentage - 100) > 0.1) { // Permitir un pequeño margen de error
-               console.warn("¡Los porcentajes de distribución de paquetes no suman 100!");
-               // Fallback a la distribución uniforme si la configuración es incorrecta
-               return packetClasses[Math.floor(Math.random() * packetClasses.length)];
-            }
-
-            // Itera a través de la configuración para determinar la clase
-            for (const packetClass in packetDistributionConfig) {
-               cumulativePercentage += packetDistributionConfig[packetClass];
+            for (const packetClass of validClasses) {
+               cumulativePercentage += (packetDistributionConfig[packetClass] / totalPercentage) * 100; // Normalize percentage
                if (rand < cumulativePercentage) {
-                  return packetClass; // Devuelve la clase si el número aleatorio cae en su rango
+                  return packetClass;
                }
             }
-
-            // Fallback (si hay problemas de redondeo muy cerca de 100, devuelve la última clase)
-            const classes = Object.keys(packetDistributionConfig);
-            return classes[classes.length - 1];
+            return validClasses[validClasses.length - 1];
          }
 
-
-         function getRandomClass() {
-            return packetClasses[Math.floor(Math.random() * packetClasses.length)];
+         function getTableColoredDataAttribute(tableLabel) {
+            if (!tableLabel) return null;
+            // Basic camelCase conversion + "Colored" suffix
+            return tableLabel.charAt(0).toLowerCase() + tableLabel.slice(1) + 'Colored';
          }
 
-         function clasifyPacket(packet) {
-            const packetClass = packet.dataset.packetClass;
-            const packageLevelClass = packet.dataset.packageLevelClass;
-            const flowId = packet.dataset.flowId;
-            const classConf = classConfig[packetClass];
-            const packageLevelClassConf = classConfig[packageLevelClass];
+         // Get CSS variable name from table label
+         function getTableCssVariable(tableLabel) {
+            if (!tableLabel) return null;
+            if (tableLabel === 'tableA') return '--table-a-fill';
+            if (tableLabel === 'tableB') return '--table-b-fill';
+            if (tableLabel === 'tableC') return '--table-c-fill';
+            return null;
+         }
 
-            // Actualiza el contador de flujo
-            flowClassificationCount[flowId]++;
+         // Function to create and animate the ping ---
+         function createPingAnimation(targetGroup, color, yOffset) {
+            const pingCircle = document.createElementNS(NS, 'circle');
+            pingCircle.setAttribute('class', 'packet-ping');
+            pingCircle.setAttribute('cx', '0');
+            pingCircle.setAttribute('cy', '0');
+            pingCircle.setAttribute('r', '0');
+            pingCircle.setAttribute('fill', 'none');
+            pingCircle.setAttribute('stroke', color);
+            pingCircle.setAttribute('stroke-width', '8');
+            pingCircle.setAttribute('opacity', '1');
+            pingCircle.setAttribute('transform', `translate(0, ${yOffset})`);
 
-            // reset flowClassificationCount if it reaches 10
-            if (flowClassificationCount[flowId] >= 10) {
-               flowClassificationCount[flowId] = 1;
-            }
+            // Add the circle to the packet's group so it inherits position/rotation
+            targetGroup.appendChild(pingCircle);
 
-            // Cambia la clase del paquete si se ha clasificado 3 veces
-            if (flowClassificationCount[flowId] >= 3) {
-               packet.classList.add(classConf.colorClass);
-               packet.classList.add('fl-classified')
-            }
-            else {
-               packet.classList.add(packageLevelClassConf.colorClass);
-               packet.classList.add('pl-classified');
-            }
-           packet.dataset.classified = 'true';
+            // Animate the ping circle
+            anime({
+               targets: pingCircle,
+               r: 25,
+               opacity: 0,
+               strokeWidth: 0,
+               duration: 1800,
+               easing: 'easeOutExpo',
+               complete: function (anim) {
+                  pingCircle.remove();
+               }
+            });
          }
 
          function createAndAnimatePacket() {
-            const packetClass = getRandomClass();
-            const packageLevelClass = getRandomClass();
+            const packetClass = getRandomClassWithDistribution();
             const config = classConfig[packetClass];
-            const flowId = packagesFlowClassMap[packetClass][Math.floor(Math.random() * packagesFlowClassMap[packetClass].length)];
-            const pathElement = document.getElementById(config.pathId);
+            const pathElement = document.getElementById(mainPathId);
 
+            if (!config) {
+               console.error(`Configuration for packet class ${packetClass} not found.`);
+               scheduleNextPacket();
+               return;
+            }
             if (!pathElement) {
-               console.error(`Path con ID ${config.pathId} no encontrado.`);
+               console.error(`Main path with ID ${mainPathId} not found.`);
                scheduleNextPacket();
                return;
             }
 
-            const packet = document.createElementNS(NS, 'rect');
+            // --- Create group ---
+            const packetGroup = document.createElementNS(NS, 'g');
+            packetGroup.setAttribute('class', 'packet-group');
+
+
+
+            const packetRect = document.createElementNS(NS, 'rect');
             const randomWidth = minPacketWidth + Math.random() * (maxPacketWidth - minPacketWidth);
 
+            packetRect.setAttribute('class', 'packet');
+            packetRect.setAttribute('width', randomWidth);
+            packetRect.setAttribute('height', packetHeight);
+            packetRect.setAttribute('x', -randomWidth / 2);
+            packetRect.setAttribute('y', -packetHeight / 2);
+            packetRect.setAttribute('rx', packetHeight / 4);
+            packetRect.setAttribute('ry', packetHeight / 4);
+            
+            packetGroup.dataset.classified = 'false';
+            packetGroup.dataset.packetClass = packetClass;
+            packetGroup.dataset.previousSwitchId = 'none';
+            packetGroup.dataset.committedOffsetY = 0;
 
-            packet.setAttribute('class', 'packet');
-            packet.setAttribute('width', randomWidth);
-            packet.setAttribute('height', packetHeight);
-            packet.setAttribute('rx', packetHeight / 2);
-            packet.setAttribute('ry', packetHeight / 2);
-            packet.setAttribute('x', -randomWidth / 2);
-            packet.setAttribute('y', -packetHeight / 2);
-            packet.style.opacity = '1';
+            // Estruct: g > rect
+            packetGroup.appendChild(packetRect);
+            packetLayer.appendChild(packetGroup);
+            // --- End creating group ---
 
-            packet.dataset.classified = 'false';
-            packet.dataset.packetClass = packetClass;
-            packet.dataset.packageLevelClass = packageLevelClass;
-            packet.dataset.flowId = flowId;
-            packet.dataset.flowCounted = 'false';
-
-            packetLayer.appendChild(packet);
 
             const motionPath = anime.path(pathElement);
 
-            anime({
-               targets: packet,
+            const packetAnimation = anime({
+               targets: packetGroup,
                translateX: motionPath('x'),
                translateY: motionPath('y'),
                rotate: motionPath('angle'),
                easing: 'linear',
                duration: animationDuration,
                loop: false,
+               autoplay: !isPaused,
                update: function (anim) {
-                  // --- Lógica de actualización ---
-                  const currentProgress = anim.progress;
-                  if (!anim.animatables[0] || !anim.animatables[0].target) return;
+                  const currentGroup = anim.animatables[0]?.target;
+                  if (!currentGroup) return;
+                  const currentRect = currentGroup.querySelector('rect.packet');
+                  if (!currentRect) return;
 
-                  const packet = anim.animatables[0].target;
-                  const pClass = packet.dataset.packetClass;
+                  const pClass = currentGroup.dataset.packetClass;
                   const classConf = classConfig[pClass];
+                  const currentProgress = anim.progress;
+                  let packetIsClassified = currentGroup.dataset.classified === 'true'; // Current state of packet
 
-                  const label = document.getElementById(classConf.labelId);
-                  // 0. Change Switch status label if is clasifing the package
-                  if (currentProgress >= classConf.hideZones.filter(zone => zone.switch === classConf.switchId)[0].entryProgress
-                     && currentProgress < classConf.hideZones.filter(zone => zone.switch === classConf.switchId)[0].exitProgress) {
-                     
-                     if (label) {
-                        label.textContent = 'Inferring...';
-                        //label.setAttribute('fill', 'var(--class-' + pClass + ')');
-                        // set the text bold
-                        label.setAttribute('font-weight', 'bold');
-                     }
+                  // --- Retrieve stored state ---
+                  let previousSwitchId = currentGroup.dataset.previousSwitchId;
+                  let committedOffsetY = parseFloat(currentGroup.dataset.committedOffsetY);
 
-                     if (packet.dataset.classified === 'false') {
-                        clasifyPacket(packet)
-                     }
-                     
-                  } else if (packet.dataset.classified === 'true'
-                     && currentProgress >= classConf.hideZones.filter(zone => zone.switch === classConf.switchId)[0].exitProgress) {
-                     
-                     if (label) {
-                        label.textContent = 'Forwarding';
-                        label.removeAttribute('font-weight');
-                        label.setAttribute('font-weight', 'normal');
-                        
+                  // --- 1. Determine current location ---
+                  let currentSwitchId = null;
+                  let isInSwitch = false;
+                  for (const switchId in switchEntryAndExit) {
+                     if (currentProgress >= switchEntryAndExit[switchId].entry &&
+                        currentProgress <= switchEntryAndExit[switchId].exit) {
+                        currentSwitchId = switchId;
+                        isInSwitch = true;
+                        break;
                      }
                   }
 
-                  // 2. --- NUEVO: Lógica de Ocultación ---
-                  let isInsideSwitch = false;
-                  if (classConf.hideZones && classConf.hideZones.length > 0) {
-                     for (const zone of classConf.hideZones) {
-                        if (currentProgress >= zone.entryProgress && currentProgress < zone.exitProgress) {
-                           isInsideSwitch = true;
-                           break; // Encontrado dentro de una zona, no necesita verificar más
+                  // --- 2. Handle Logic Based on Location (Inside Switch / Outside) ---
+                  let yOffset = 0; // The offset to apply THIS frame
+
+                  if (isInSwitch) {
+                     const targetSwitchElement = document.getElementById(currentSwitchId);
+                     const isClassificationSwitch = (currentSwitchId === classConf.classificationSwitch);
+                     const threshold = classConf.classifyThreshold;
+                     const currentCount = classificationCounts[pClass]; // Global count for this class
+                     const tableLabel = classToTableLabel[pClass];
+
+                     // --- A. Entered a NEW switch this frame? ---
+                     if (currentSwitchId !== previousSwitchId) {
+                        // --- Determine the initial path FOR THIS VISIT based on state AT ENTRY ---
+                        let initialAction; // Start undefined
+
+                        // Get the configured action for this specific switch, default to 'forward' if undefined
+                        const configuredAction = classConf.behavior[currentSwitchId] ? classConf.behavior[currentSwitchId].action : 'forward';
+
+                        // --- Apply Path Decision Rules ---
+
+                        // Rule 1: If packet is ALREADY classified upon entering ANY switch, it always forwards.
+                        if (packetIsClassified) {
+                           initialAction = 'forward';
                         }
+                        // Rule 2 & 3: If entering its designated CLASSIFICATION switch...
+                        else if (isClassificationSwitch) {
+                           if (currentCount >= threshold) {
+                              initialAction = 'forward';
+                           } else {
+                              initialAction = 'inference'; // Rule 3: Threshold not met, take inference path (will infer/color mid-switch)
+                           }
+                        }
+                        // Rule 4 & 5: If entering a switch BEFORE its classification switch...
+                        else {
+                           initialAction = configuredAction; // Use the action defined in classConfig for this switch
+                        }
+                        // --- End Path Decision Rules ---
+
+                        // Lock the offset for this switch visit
+                        committedOffsetY = (initialAction === 'inference') ? inferenceOffsetY : forwardOffsetY;
+                        currentGroup.dataset.committedOffsetY = committedOffsetY;
+                        currentGroup.dataset.previousSwitchId = currentSwitchId; // Mark entry into this switch
+
+                        yOffset = committedOffsetY; // Use the newly committed offset immediately
+
+                        // Handle subsequent switch table coloring ON ENTRY (if packet was already classified)
+                        if (packetIsClassified && !isClassificationSwitch && targetSwitchElement && tableLabel) {
+                           const dataAttributeName = getTableColoredDataAttribute(tableLabel);
+                           if (dataAttributeName && targetSwitchElement.dataset[dataAttributeName] !== 'true') {
+                              const targetColor = getComputedStyle(document.documentElement).getPropertyValue(`--class-${pClass}`).trim();
+                              const variableName = getTableCssVariable(tableLabel);
+                              if (variableName && targetColor) {
+                                 targetSwitchElement.style.setProperty(variableName, targetColor);
+                                 targetSwitchElement.dataset[dataAttributeName] = 'true';
+                              }
+                           }
+                        }
+
+                     } else {
+                        // --- B. Still inside the SAME switch ---
+                        // Use the offset that was committed upon entry
+                        yOffset = committedOffsetY;
+
+                        // Perform MID-SWITCH classification logic (if applicable), but WITHOUT changing path
+                        if (isClassificationSwitch && !packetIsClassified) {
+                           // Determine the point at which classification visually happens
+                           // Use midpoint for inference path, slightly after entry for forward path
+                           const midProgressPoint = committedOffsetY === inferenceOffsetY ? // Check committed path!
+                              (switchEntryAndExit[currentSwitchId].entry + switchEntryAndExit[currentSwitchId].exit) / 2 :
+                              (switchEntryAndExit[currentSwitchId].entry + 3); // Point for packets forced forward by threshold
+
+                           if (currentProgress >= midProgressPoint) {
+                              // --- Classification happens here ---
+                              packetIsClassified = true; // Update local flag
+                              currentGroup.dataset.classified = 'true'; // Persist on packet
+                              currentRect.classList.add(classConf.colorClass);
+
+                              // PING ANIMATION TRIGGER
+                              const packetColor = getComputedStyle(document.documentElement)
+                                 .getPropertyValue(`--class-${pClass}`).trim();
+                              if (packetColor) {
+                                 createPingAnimation(currentGroup, packetColor, yOffset); // Call the helper
+                              }
+                              // END: PING ANIMATION TRIGGER
+
+                              if (currentCount < threshold) {
+                                 classificationCounts[pClass]++;
+
+                                 // Check if THIS classification just hit the threshold - color table
+                                 if (classificationCounts[pClass] === threshold) {
+                                    const variableName = getTableCssVariable(tableLabel);
+                                    const targetColor = getComputedStyle(document.documentElement).getPropertyValue(`--class-${pClass}`).trim();
+                                    if (targetSwitchElement && variableName && targetColor) {
+                                       targetSwitchElement.style.setProperty(variableName, targetColor);
+                                       const dataAttrName = getTableColoredDataAttribute(tableLabel);
+                                       if (dataAttrName) targetSwitchElement.dataset[dataAttrName] = 'true';
+                                    }
+                                 }
+                              } else {
+                                 // This branch handles the case where threshold was already met, but the packet
+                                 // started this switch visit unclassified (and took the 'forward' path due to Rule 2)
+                                 // Now it just gets colored.
+                              }
+                              // Packet is now colored, but yOffset remains locked to committedOffsetY
+                           }
+                        } // End if (isClassificationSwitch && !packetIsClassified)
+                     } // End if/else (New switch vs Same switch)
+
+                  } else {
+                     // --- C. Outside any switch ---
+                     yOffset = 0;
+
+                     // Reset state if it just exited a switch
+                     if (previousSwitchId !== 'none') {
+                        currentGroup.dataset.previousSwitchId = 'none';
+                        currentGroup.dataset.committedOffsetY = yOffset; // Store default offset
+                        previousSwitchId = 'none'; // Update local var for this frame
                      }
-                  }
+                  } // End if/else (isInSwitch)
 
-                  // Aplicar visibilidad basado en si está dentro de una zona o no
-                  packet.style.opacity = isInsideSwitch ? '0' : '1';
+                  // --- 3. Apply the determined Transform ---
+                  currentRect.setAttribute('transform', `translate(0, ${yOffset})`);
 
-               },
+               }, // --- end update ---
                complete: function (anim) {
-                  if (anim.animatables[0] && anim.animatables[0].target) {
-                     anim.animatables[0].target.remove();
+                  // --- Remove from tracking array ---
+                  const index = activePacketAnimations.indexOf(anim);
+                  if (index > -1) {
+                     activePacketAnimations.splice(index, 1);
+                  }
+                  // --- Remove element ---
+                  const finishedGroup = anim.animatables[0]?.target;
+                  if (finishedGroup) {
+                      finishedGroup.remove();
                   }
                }
-            });
+            }); // end anime
 
-            scheduleNextPacket();
+            activePacketAnimations.push(packetAnimation);
+
+            
          }
 
          function scheduleNextPacket() {
-            // only schedule next packet if the amount of animated packages is less than 15
-
-            const animatedPackets = packetLayer.querySelectorAll('g');
-            if (animatedPackets.length >= 15) {
-               setTimeout(scheduleNextPacket, 1000);
-               return;
+            // 1. Check Pause State
+            if (isPaused) {
+                  // If paused, just check again later. Don't create packet.
+                  setTimeout(scheduleNextPacket, maxInterval); // Check periodically
+                  return;
             }
 
-            const randomInterval = minInterval + Math.random() * (maxInterval - minInterval);
-            setTimeout(createAndAnimatePacket, randomInterval);
-         }
+            // 2. Check Packet Limit
+            // Query *inside* scheduleNextPacket to get current count
+            const animatedPackets = packetLayer.querySelectorAll('g.packet-group');
+            if (animatedPackets.length >= 20) {
+                  console.warn(`Packet limit (${animatedPackets.length}) reached. Waiting...`);
+                  // Wait a bit longer before checking limit again
+                  setTimeout(scheduleNextPacket, 1000);
+                  return;
+            }
 
-         // --- Iniciar la simulación ---
-         createAndAnimatePacket();
+            // 3. Calculate Delay and Schedule Creation
+            const randomInterval = minInterval + Math.random() * (maxInterval - minInterval);
+            setTimeout(() => {
+                  // Double-check pause state *before* creating
+                  if (!isPaused) {
+                     createAndAnimatePacket(); // Create the packet
+                  }
+                  // IMPORTANT: Whether created or not (due to pause), schedule the *next* check/creation attempt.
+                  scheduleNextPacket();
+            }, randomInterval);
+
+         } // --- END scheduleNextPacket --- // --- Button Controllers (Logic looks correct now) ---
+         const playButton = document.getElementById('play-button');
+         const pauseButton = document.getElementById('pause-button');
+
+         pauseButton.onclick = () => {
+             if (!isPaused) {
+                 [...activePacketAnimations].forEach(animInstance => {
+                     if (animInstance && !animInstance.paused) {
+                          animInstance.pause();
+                     }
+                 });
+                 isPaused = true;
+                 pauseButton.style.display = 'none';
+                 playButton.style.display = 'inline-block';
+                 console.log('Animations Paused (Creation Halted)');
+                 // No need to call scheduleNextPacket here, loop stops itself
+             }
+         };
+
+         playButton.onclick = () => {
+             if (isPaused) {
+                  isPaused = false; // Set state FIRST
+                 [...activePacketAnimations].forEach(animInstance => {
+                     if (animInstance && animInstance.paused) {
+                          animInstance.play();
+                     }
+                 });
+                 playButton.style.display = 'none';
+                 pauseButton.style.display = 'inline-block';
+                 console.log('Animations Played (Creation Resumed)');
+             }
+         };
+
+
+         // --- Start the simulation ---
+         // *** IMPORTANT: Call scheduleNextPacket to begin the loop ***
+         scheduleNextPacket();
 
       });
    </script>
