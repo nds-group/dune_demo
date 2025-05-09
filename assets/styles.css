@@ -217,11 +217,13 @@ iframe {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 #footer {
-  height: 3em;
+  margin: 10px 0;
+  padding: 0 5vw;
 }
 #footer div img {
   width: auto;
-  height: 2.5em;
+  min-height: 6vh;
+  height: 4em;
 }
 #header {
   display: flex;

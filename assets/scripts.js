@@ -150,7 +150,11 @@ var optionsLine = {
   xaxis: {
     type: 'datetime',
     range: 20 * 60 * 1000, // 20 minutes in milliseconds
-    fontSize: '20px'//TODO: set the font size (does not work now)
+    labels: {
+      style: {
+        fontSize: '1.2vh',
+      },
+    },
   },
   title: {
     text: 'Macro F1-Score',
@@ -182,7 +186,11 @@ var optionsLine = {
   yaxis: {
     min: 0,
     max: 1,
-    fontSize: '20px' //TODO: set the font size (does not work now)
+    labels: {
+      style: {
+        fontSize: '1.2vh',
+      },
+    },
   },
   fill: {
     type: 'solid'
@@ -207,7 +215,7 @@ var optionsCombinedPerf = {
   plotOptions: {
     bar: {
       horizontal: true,
-      barHeight: '75%',
+      barHeight: '70%',
       dataLabels: {
         position: 'right'
       }
@@ -247,21 +255,28 @@ var optionsCombinedPerf = {
       style: {
         color: '#fff',
         fontWeight: 600,
-        fontSize: '16px'
+        fontSize: '1.2vh'
       }
     }
   },
   dataLabels: {
+    offsetY: 6,
     enabled: true,
     style: {
-      fontSize: '13px',
-      colors: ['#fff']
+      fontSize: '1vh',
+      colors: ['#fff'],
     },
     formatter: (val) => (val == null ? '' : val.toFixed(3)),
   },
   tooltip: {
     enabled: true,
-    // shared: true
+    shared: true,
+    intersect: false,
+    x: {
+      formatter: function (val) {
+        return val;
+      }
+    },
   },
   legend: {
     show: true,
@@ -320,9 +335,9 @@ var optionsnoInference = {
   subtitle: {
     floating: true,
     align: 'right',
-    offsetY: 0,
+    offsetY: 15,
     style: {
-      fontSize: '20px'
+      fontSize: '1.5vh'
     }
   },
   tooltip: {
@@ -378,9 +393,9 @@ var optionsMousika = {
   subtitle: {
     floating: true,
     align: 'right',
-    offsetY: 0,
+    offsetY: 15,
     style: {
-      fontSize: '20px'
+      fontSize: '1.5vh'
     }
   },
   tooltip: {
@@ -440,9 +455,9 @@ var optionsJewel = {
   subtitle: {
     floating: true,
     align: 'right',
-    offsetY: 0,
+    offsetY: 15,
     style: {
-      fontSize: '20px'
+      fontSize: '1.5vh'
     }
   },
   tooltip: {
@@ -497,9 +512,9 @@ var optionsDune = {
   subtitle: {
     floating: true,
     align: 'right',
-    offsetY: 0,
+    offsetY: 15,
     style: {
-      fontSize: '20px'
+      fontSize: '1.5vh'
     }
   },
   tooltip: {
