@@ -32,14 +32,13 @@
             <button id="toggleJewel" class="default-button">JEWEL</button>
             <button id="toggleDune" class="default-button">DUNE</button>
           </div> -->
-          <div class="text-right mt-3 d-fixed">
+          <div class="" id="header">
             <div class="d-inline-block text-center mr-3">
               <button id="toggleNoInference" class="default-button">NO INFERENCE</button>
-              <div class="button-label">.<br>.</div>
             </div>
             <div class="d-inline-block text-center mr-3">
               <button id="toggleMousika" class="default-button">MOUSIKA</button>
-              <div class="button-label">Packet-level <br> . </div>
+              <div class="button-label">Packet-level</div>
             </div>
             <div class="d-inline-block text-center mr-2">
               <button id="toggleJewel" class="default-button">JEWEL</button>
@@ -51,45 +50,47 @@
             </div>
           </div>
           <div class="main">
-            <div class="row mt-4">
-              <div class="col-md-6">
-                <div id="frame" class="box columnbox mt-4" style="height: 420px;" title="Topology">
+            <div class="row">
+              <div class="col-md-6 panel">
+                <div id="frame" class="box columnbox" title="Topology">
                   <div id="columnchart"></div>
                    <!-- Animation container -->
                     <h2 class="chart-title">User Plane Topology</h2>
-                    <iframe id="animation-frame" src="" width="100%" height="300" style="border:none;"></iframe>
+                    <iframe id="animation-frame" src="" width="100%" height="100%" style="border:none;"></iframe>
                 </div>
               </div>
-              <div id="frame" class="col-md-6">
-                <div class="box  mt-4">
+              <div id="frame" class="col-md-6 panel">
+                <div class="box">
                   <div id="linechart"></div>
                 </div>
               </div>
             </div>
 
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6 panel">
                 <div id="frame" class="box mt-4">
                   <h2 class="chart-title">Classification Accuracy</h2>
-                  <div class="mt-4">
+                  <div>
                     <div id="combinedPerformance"></div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 panel">
                 <div id="frame" class="box mt-4">
                   <h2 class="chart-title">Traffic Switching Latency (ns)</h2>
-                  <div class="mt-4">
-                    <div id="noInference"></div>
-                  </div>
-                  <div class="mt-4">
-                    <div id="Mousika"></div>
-                  </div>
-                  <div class="mt-4">
-                    <div id="Jewel"></div>
-                  </div>
-                  <div class="mt-4">
-                    <div id="Dune"></div>
+                  <div class="latency-charts">
+                    <div class="">
+                      <div id="noInference"></div>
+                    </div>
+                    <div class="">
+                      <div id="Mousika"></div>
+                    </div>
+                    <div class="">
+                      <div id="Jewel"></div>
+                    </div>
+                    <div class="">
+                      <div id="Dune"></div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -125,7 +126,7 @@
               </div>
             </div> -->
 
-            <div class="row justify-content-between align-items-center px-3">
+            <div class="row justify-content-between align-items-center px-2 pt-2 pb-1" id="footer">
               <div class="logos-left">
                 <div class="IMDEA-logo">
                   <img src="assets/IMDEA-logo.png" alt="IMDEA-logo"/>
@@ -151,9 +152,9 @@
       </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="assets/scripts.js"></script>
+    <script src="/assets/jquery.slim.min.js"></script>
+    <script src="/assets/moment.min.js"></script>
+    <script src="/assets/apexcharts.js"></script>
+    <script src="/assets/scripts.js"></script>
   </body>
 </html>

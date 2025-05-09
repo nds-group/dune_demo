@@ -18,8 +18,6 @@
       <button id="pause-button" style="padding: 10px 20px;">Pause</button>
    </div>
 
-
-   <!-- Contenedor Principal -->
    <div class="network-diagram">
 
       <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -177,11 +175,6 @@
                      stroke: #555;
                      stroke-width: 0.5;
                   }
-
-                  .led {
-                     /* Estilos base del LED */
-                  }
-
                   .led-on {
                      fill: #00ff00;
                   }
@@ -199,10 +192,6 @@
                </style>
                <rect class="switch-body" x="5" y="10" width="170" height="50" rx="4" ry="4" id="rect2" />
                <g id="g11" inkscape:label="g11">
-                  <!-- LEDs -->
-                  <!-- Puerto 1 -->
-                  <!-- Puerto 2 -->
-                  <!-- Puerto 3 -->
                   <g id="g40" inkscape:label="leds" transform="translate(-10,22)" style="display:inline">
                      <circle class="led led-on" cx="27.5" cy="20" r="2.5" id="circle5" style="display:none" />
                      <circle class="led led-off" cx="47.5" cy="20" r="2.5" id="circle6" style="display:none" />
@@ -210,8 +199,6 @@
                      <circle class="led led-on" cx="87.5" cy="20" r="2.5" id="circle8" style="display:none" />
                      <circle class="led led-on" cx="178.90355" cy="-6.5233498" r="2.5" id="circle42" />
                   </g>
-                  <!-- Puerto 4 -->
-                  <!-- Puertos RJ45 -->
                   <g id="g41" inkscape:label="inference-block">
                      <path
                         style="display:none;opacity:0.860725;fill:none;fill-opacity:1;stroke:#d3d2b9;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.890196;paint-order:fill markers stroke"
@@ -264,25 +251,25 @@
             </symbol>
          </defs>
          <g id="switch-layer" transform="translate(67.647795,3.8892291)">
-            <!-- Instancia Switch A -->
+            <!-- Instance Switch A -->
             <g id="switch-a" transform="matrix(0.99992533,0,0,0.99992533,49.997341,39.998601)">
-               <!-- Etiqueta específica para esta instancia -->
+               <!-- Instance label -->
                <use xlink:href="#g10" id="switchA" transform="translate(-663.1128,-119.64015)"
                   style="--show-inference: none; --show-registers: none" inkscape:label="switchA" />
                <text x="63.743423" y="10.844433" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px"
                   fill="#dddddd" id="switch-label-a" data-name="Switch A" style="font-size:16.0012px">Switch A</text>
             </g>
-            <!-- Instancia Switch B -->
+            <!-- Instance Switch B -->
             <g id="switch-b" transform="translate(291.32041,65.942477)">
-               <!-- Etiqueta específica para esta instancia -->
+               <!-- Instance label -->
                <text x="89.619743" y="-15.099602" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px"
                   fill="#dddddd" id="switch-label-b" data-name="Switch B" style="font-size:16px">Switch B</text>
                <use xlink:href="#g10" id="switchB" transform="translate(-637.56464,-145.5899)"
                   style="--show-inference: none; --show-registers: none" inkscape:label="switchB" />
             </g>
-            <!-- Instancia Switch C -->
+            <!-- Instance Switch C -->
             <g id="switch-c" transform="translate(570,65.942477)">
-               <!-- Etiqueta específica para esta instancia -->
+               <!-- Instance label -->
                <text x="77.726685" y="-15.099602" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px"
                   fill="#dddddd" id="switch-label-c" data-name="Switch C" style="font-size:16px">Switch C</text>
                <use xlink:href="#g10" id="switchC" transform="translate(-649.37566,-145.5899)"
@@ -311,15 +298,10 @@
                d="m -17.810889,126.82123 921.524859,0.78692" id="package-path" inkscape:label="classD"
                sodipodi:nodetypes="cc" />
          </g>
-         <!-- Capa para los paquetes animados (DEBE ESTAR DESPUÉS para verse encima) -->
          <g id="packet-layer" transform="translate(0,0)">
-            <!-- Los paquetes se añadirán aquí dinámicamente -->
+            <!-- packets will be here -->
          </g>
       </svg>
-
-
-
-
    </div>
 
    <script>
@@ -484,8 +466,6 @@
             // --- Create group ---
             const packetGroup = document.createElementNS(NS, 'g');
             packetGroup.setAttribute('class', 'packet-group');
-
-
 
             const packetRect = document.createElementNS(NS, 'rect');
             const randomWidth = minPacketWidth + Math.random() * (maxPacketWidth - minPacketWidth);
@@ -686,8 +666,6 @@
             }); // end anime
 
             activePacketAnimations.push(packetAnimation);
-
-
          }
 
          function scheduleNextPacket() {
@@ -751,10 +729,6 @@
                console.log('Animations Played (Creation Resumed)');
             }
          };
-
-
-         // --- Start the simulation ---
-         // *** IMPORTANT: Call scheduleNextPacket to begin the loop ***
          scheduleNextPacket();
 
       });

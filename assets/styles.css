@@ -92,7 +92,7 @@ h1, h2, h3, h4, h5, h6, strong {
 
 iframe {
   height: 100%;
-  max-height: 250px;
+  max-height: 40vh;
 }
 
 .d-fixed {
@@ -114,7 +114,6 @@ iframe {
 }
 
 .IMDEA-logo img, .EU img, .SNS-6G img, .Madrid-logo img {
-  width: 150px;  /* Adjust to your needs */
   height: auto;
   margin: 0 8px;  /* Space between logos */
   margin-top: -1px;
@@ -208,12 +207,50 @@ iframe {
   resize: both;
   overflow: auto;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative; /* IMPORTANT */
-  z-index: 1; /* default layer */
+  position: relative;
+  z-index: 1;
 }
 
 #frame:hover {
-  transform: scale(1.2);
+  /*transform: scale(1.2);*/
   z-index: 1000; /* bring to front */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+#footer {
+  height: 3em;
+}
+#footer div img {
+  width: auto;
+  height: 2.5em;
+}
+#header {
+  display: flex;
+  justify-content: right;
+  padding: 1em;
+}
+#header div {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+.panel {
+  height: 40vh !important;
+  overflow: hidden;
+}
+.panel div#frame {
+  overflow: hidden;
+}
+.latency-charts {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  height: 100%;
+  max-height: 35vh;
+}
+div#linechart {
+    margin: auto;
+    height: 100%;
+}
+div#linechart .apexcharts-canvas {
+  margin: auto;
 }

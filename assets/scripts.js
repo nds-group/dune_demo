@@ -48,9 +48,31 @@ window.Apex = {
 
 // MACRO F1 
 
+function chartHeight() {
+  const windowHeight = window.innerHeight;
+  let chartHeight;
+  let btnMargin;
+
+  if (windowHeight < 600) { //small screens
+    btnMargin = 15;
+  } else if (windowHeight < 900) { // medium screens
+    btnMargin = 25;
+  } else { // big screens
+    btnMargin = 40; 
+  }
+
+  chartHeight = windowHeight / 3 - btnMargin;
+  if (chartHeight < 200) { // minimum height
+    chartHeight = 200;
+  }
+
+  return chartHeight;
+}
+
+
 var optionsLine = {
   chart: {
-    height: 350,
+    height: chartHeight() + 30,
     type: 'line',
     // stacked: false,
     animations: {
@@ -167,6 +189,7 @@ var optionsLine = {
   },
 }
 
+
 var chartLine = new ApexCharts(
   document.querySelector("#linechart"),
   optionsLine
@@ -178,7 +201,7 @@ chartLine.render()
 var optionsCombinedPerf = {
   chart: {
     type: 'bar',
-    height: 347,
+    height: chartHeight(),
     stacked: false,
   },
   plotOptions: {
@@ -265,7 +288,7 @@ chartCombinedPerf.render();
 
 var optionsnoInference = {
   chart: {
-    height: 70,
+    height: chartHeight() / 4,
     type: 'bar',
     stacked: true,
     sparkline: {
@@ -322,7 +345,7 @@ chartnoInference.render();
 
 var optionsMousika = {
   chart: {
-    height: 70,
+    height: chartHeight() / 4,
     type: 'bar',
     stacked: true,
     sparkline: {
@@ -380,7 +403,7 @@ chartMousika.render();
 
 var optionsJewel = {
   chart: {
-    height: 70,
+    height: chartHeight() / 4,
     type: 'bar',
     stacked: true,
     sparkline: {
@@ -437,7 +460,7 @@ chartJewel.render();
 
 var optionsDune = {
   chart: {
-    height: 80,
+    height: chartHeight() / 4 + 10,
     type: 'bar',
     stacked: true,
     sparkline: {
@@ -507,47 +530,47 @@ window.setInterval(function () {
     }
 
     fetch('assets/data/ToN_5min_latency_no_inference.json')
-    .then(response => response.json())
-    .then(data => {
-      window.noInferenceLatencyData = data['latency'];
-    })
-    .catch(error => console.error('Error loading JSON:', error));
+      .then(response => response.json())
+      .then(data => {
+        window.noInferenceLatencyData = data['latency'];
+      })
+      .catch(error => console.error('Error loading JSON:', error));
     fetch('assets/data/ToN_5min_latency_mousika.json')
-    .then(response => response.json())
-    .then(data => {
-      window.mousikaLatencyData = data['latency'];
-    })
-    .catch(error => console.error('Error loading JSON:', error));
+      .then(response => response.json())
+      .then(data => {
+        window.mousikaLatencyData = data['latency'];
+      })
+      .catch(error => console.error('Error loading JSON:', error));
     fetch('assets/data/ToN_5min_latency_jewel.json')
-    .then(response => response.json())
-    .then(data => {
-      window.jewelLatencyData = data['latency'];
-    })
-    .catch(error => console.error('Error loading JSON:', error));
+      .then(response => response.json())
+      .then(data => {
+        window.jewelLatencyData = data['latency'];
+      })
+      .catch(error => console.error('Error loading JSON:', error));
     fetch('assets/data/ToN_5min_latency_dune.json')
-    .then(response => response.json())
-    .then(data => {
-      window.duneLatencyData = data['latency'];
-    })
-    .catch(error => console.error('Error loading JSON:', error));
+      .then(response => response.json())
+      .then(data => {
+        window.duneLatencyData = data['latency'];
+      })
+      .catch(error => console.error('Error loading JSON:', error));
 
     fetch('assets/data/ToN_5min_mousika.json')
-    .then(response => response.json())
-    .then(data => {
-      window.mousikaPerfData = data;
-    })
-    .catch(error => console.error('Error loading JSON:', error));
+      .then(response => response.json())
+      .then(data => {
+        window.mousikaPerfData = data;
+      })
+      .catch(error => console.error('Error loading JSON:', error));
 
     fetch('assets/data/ToN_5min_jewel.json')
-    .then(response => response.json())
-    .then(data => {
-      window.jewelPerfData = data;
-    })
-    .catch(error => console.error('Error loading JSON:', error));
+      .then(response => response.json())
+      .then(data => {
+        window.jewelPerfData = data;
+      })
+      .catch(error => console.error('Error loading JSON:', error));
 
     //
     window.currentPath = null,
-    window.noInferenceIndex = 0; // Tracks where we left off
+      window.noInferenceIndex = 0; // Tracks where we left off
     window.mousikaIndex = 0; // Tracks where we left off
     window.jewelIndex = 0; // Tracks where we left off
     window.duneIndex = 0; // Tracks where we left off
@@ -567,7 +590,7 @@ window.setInterval(function () {
   document.getElementById('toggleDune').addEventListener('click', () => {
     toggleChartUpdate('dune');
   });
-  
+
   document.getElementById('toggleMousika').addEventListener('click', () => {
     toggleChartUpdate('mousika');
   });
@@ -595,7 +618,7 @@ window.setInterval(function () {
       window.intervalId = setInterval(() => {
         // Stop if we reached end of data
         // if (window.noInferenceIndex >= window.noInferenceLatencyData.length) {
-          if (window.noInferenceIndex >= 60) {
+        if (window.noInferenceIndex >= 60) {
           showAnimation('');
           stopChartUpdate();
           return;
@@ -661,8 +684,8 @@ window.setInterval(function () {
         }, false, false);
 
         chartJewel.updateOptions({
-          series: [{ data: [lat_jew.toFixed(3)]}],
-          subtitle: { text: lat_jew.toFixed(3)}
+          series: [{ data: [lat_jew.toFixed(3)] }],
+          subtitle: { text: lat_jew.toFixed(3) }
         });
 
         chartCombinedPerf.updateSeries([
@@ -791,10 +814,10 @@ window.setInterval(function () {
             data: [{ x: now.getTime(), y: null }]
           },
           {
-            data: [{ x: now.getTime(), y: parseFloat(macro_inst_mous.toFixed(3))}]
+            data: [{ x: now.getTime(), y: parseFloat(macro_inst_mous.toFixed(3)) }]
           },
           {
-            data: [{ x: now.getTime(), y: parseFloat(macro_mous.toFixed(3))}]
+            data: [{ x: now.getTime(), y: parseFloat(macro_mous.toFixed(3)) }]
           }
         ]);
         chartLine.updateOptions({
@@ -832,7 +855,7 @@ window.setInterval(function () {
     clearInterval(window.intervalId);
     window.intervalId = null;
     window.state_demo = 0;
-  
+
     // Reset button labels
     const toggleNoInfBtn = document.getElementById('toggleNoInference');
     toggleNoInfBtn.classList.remove('active-button');
@@ -849,11 +872,12 @@ window.setInterval(function () {
     const toggleDuneBtn = document.getElementById('toggleDune');
     toggleDuneBtn.classList.remove('active-button');
     toggleDuneBtn.classList.add('default-button');
-  
+
     window.currentUpdater = null;
   }
 
   function showAnimation(htmlFile) {
+    console.log('showAnimation', htmlFile)
     const frame = document.getElementById('animation-frame');
     frame.src = htmlFile;
     frame.parentElement.style.display = 'block'; // ensures it's visible
@@ -865,7 +889,7 @@ window.setInterval(function () {
     return newArr;
   }
 
-  if(window.state_demo == 0) {
+  if (window.state_demo == 0) {
     const now = new Date();
     chartLine.updateOptions({
       xaxis: {
@@ -887,10 +911,10 @@ window.setInterval(function () {
         data: [{ x: now.getTime(), y: null }]
       },
       {
-        data: [{ x: now.getTime(), y:null }]
+        data: [{ x: now.getTime(), y: null }]
       },
       {
-        data: [{ x: now.getTime(), y: null}]
+        data: [{ x: now.getTime(), y: null }]
       }
     ]);
   }
