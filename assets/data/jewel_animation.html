@@ -5,90 +5,10 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>JEWEL animation</title>
-   <style>
-      /* set colors as vars */
-      :root {
-         --red: #cc5b06;
-         --blue: #0790eb;
-         --green: #8ac926;
-         --yellow: #ffca3a;
-         --purple: #914aee;
-         --class-A: var(--red);
-         --class-B: var(--blue);
-         --class-C: var(--purple);
-         --class-D: var(--yellow);
-      }
 
-      body {
-         font-family: sans-serif;
-         background-color: #262d47;
-         overflow: hidden;
-      }
+   <link rel="stylesheet" href="/assets/topology_animations.css" />
+   <script src="/assets/anime.min.js"></script>
 
-      h1 {
-         text-align: center;
-         color: #ddd;
-      }
-
-      .network-diagram {
-         position: relative;
-      }
-
-      #network-svg {
-         display: block;
-         margin: 0 auto;
-         max-width: 100%;
-         height: auto;
-         overflow: visible;
-      }
-
-      #cable-layer path {
-         fill: none;
-         stroke-linecap: round;
-      }
-
-      .packet {
-         /* Tamaño inicial del paquete */
-         r: 5;
-         /* Color inicial antes de clasificación */
-         fill: #fff;
-         stroke: #333;
-         stroke-width: 1;
-         /* Transición suave para el cambio de color */
-         transition: fill 0.1s ease, transform 0.3s ease-in-out;
-      }
-
-      .packet.classified-A {
-         fill: var(--red);
-         /* Rojo */
-      }
-
-      .packet.classified-B {
-         fill: var(--blue);
-         /* Azul */
-      }
-
-      .packet.classified-C {
-         fill: var(--purple);
-         /* Verde */
-      }
-
-      .packet.classified-D {
-         fill: var(--yellow);
-         /* Naranja */
-      }
-
-      #svg-definitions {
-         position: absolute;
-         width: 0;
-         height: 0;
-         overflow: hidden;
-      }
-
-      #switchC #rect4
-   </style>
-
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
 </head>
 
 <body>
@@ -96,16 +16,16 @@
    <div style="text-align: center; margin-bottom: 20px; display:none">
       <button id="play-button" style="padding: 10px 20px; display: none;">Play</button>
       <button id="pause-button" style="padding: 10px 20px;">Pause</button>
-  </div>
+   </div>
 
 
    <!-- Contenedor Principal -->
    <div class="network-diagram">
 
       <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-      <svg viewBox="0 0 897.83679 245.02551"
-         aria-labelledby="diagramTitle diagramDesc" version="1.1" id="svg10" sodipodi:docname="switch.svg"
-         inkscape:version="1.4 (e7c3feb100, 2024-10-09)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+      <svg viewBox="0 0 897.83679 245.02551" aria-labelledby="diagramTitle diagramDesc" version="1.1" id="svg10"
+         sodipodi:docname="switch.svg" inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+         xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
          xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:xlink="http://www.w3.org/1999/xlink"
          xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
          <sodipodi:namedview id="namedview10" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25"
@@ -178,26 +98,21 @@
                      style="opacity:0.860725;fill:#b3b3b3;stroke:#000000;stroke-width:3.0164;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.890196;paint-order:fill markers stroke"
                      id="rect3" width="196.99854" height="87.933403" x="629.01556" y="154.30424" rx="4.4060531"
                      ry="8.2601871" inkscape:label="switchContainer" />
-                  <rect
-                     style="opacity:0.860725;stroke:none;stroke-width:0.331272;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.331272, 0.993814;stroke-dashoffset:0.331272;stroke-opacity:0.890196;paint-order:fill markers stroke;
-                        display:var(--show-registers, inline);"
-                     id="symbol-tableA" class="table-rect-common" width="10.09952" height="7.6979146" x="635.21362"
-                     y="162.73387" rx="1.029658" ry="0.4263173" inkscape:label="tableA" />
-                  <rect
-                     style="opacity:0.860725;stroke:none;stroke-width:0.331272;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.331272, 0.993814;stroke-dashoffset:0.331272;stroke-opacity:0.890196;paint-order:fill markers stroke;
-                        display:var(--show-registers, inline);"
-                     id="symbol-tableB" class="table-rect-common" inkscape:label="tableB" width="10.09952"
-                     height="7.6979146" x="635.21362" y="172.84349" rx="1.029658" ry="0.4263173" />
-                  <rect
-                     style="opacity:0.860725;stroke:none;stroke-width:0.331272;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.331272, 0.993814;stroke-dashoffset:0.331272;stroke-opacity:0.890196;paint-order:fill markers stroke;
-                        display:var(--show-registers, inline);"
-                     id="symbol-tableC" class="table-rect-common" width="10.09952" height="7.6979146" x="635.21362"
-                     y="183.21252" rx="1.029658" ry="0.4263173" inkscape:label="tableC" />
-                  <rect
-                     style="opacity:0.860725;fill:var(--yellow);stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2, 6;stroke-dashoffset:2;stroke-opacity:0.890196;paint-order:fill markers stroke;
-                        display:var(--show-inference, inline);"
-                     id="rect4" width="115.02833" height="29.871696" x="680.36133" y="163.17972" rx="4" ry="4"
-                     inkscape:label="inferenceBlock" />
+                  <rect style="opacity:0.860725;stroke:none;stroke-width:0.331272;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.331272, 0.993814;stroke-dashoffset:0.331272;stroke-opacity:0.890196;paint-order:fill markers stroke;
+                        display:var(--show-registers, inline);" id="symbol-tableA" class="table-rect-common"
+                     width="10.09952" height="7.6979146" x="635.21362" y="162.73387" rx="1.029658" ry="0.4263173"
+                     inkscape:label="tableA" />
+                  <rect style="opacity:0.860725;stroke:none;stroke-width:0.331272;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.331272, 0.993814;stroke-dashoffset:0.331272;stroke-opacity:0.890196;paint-order:fill markers stroke;
+                        display:var(--show-registers, inline);" id="symbol-tableB" class="table-rect-common"
+                     inkscape:label="tableB" width="10.09952" height="7.6979146" x="635.21362" y="172.84349"
+                     rx="1.029658" ry="0.4263173" />
+                  <rect style="opacity:0.860725;stroke:none;stroke-width:0.331272;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.331272, 0.993814;stroke-dashoffset:0.331272;stroke-opacity:0.890196;paint-order:fill markers stroke;
+                        display:var(--show-registers, inline);" id="symbol-tableC" class="table-rect-common"
+                     width="10.09952" height="7.6979146" x="635.21362" y="183.21252" rx="1.029658" ry="0.4263173"
+                     inkscape:label="tableC" />
+                  <rect style="opacity:0.860725;fill:var(--yellow);stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2, 6;stroke-dashoffset:2;stroke-opacity:0.890196;paint-order:fill markers stroke;
+                        display:var(--show-inference, inline);" id="rect4" width="115.02833" height="29.871696"
+                     x="680.36133" y="163.17972" rx="4" ry="4" inkscape:label="inferenceBlock" />
                   <rect
                      style="opacity:0.860725;fill:var(--green);stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2, 6;stroke-dashoffset:2;stroke-opacity:0.890196;paint-order:fill markers stroke"
                      id="rect5" width="115.02833" height="29.871696" x="680.36133" y="204.50464" rx="4" ry="4"
@@ -208,10 +123,9 @@
                      <tspan sodipodi:role="line" id="tspan7" x="692.9364" y="227.30197"
                         style="font-size:21.3333px;fill:#000000">Forward</tspan>
                   </text>
-                  <text xml:space="preserve"
-                     style="font-size:21.3333px;font-family:arial;-inkscape-font-specification:arial;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;opacity:0.860725;fill:#ffcc00;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.581339;paint-order:fill markers stroke;
-                     display:var(--show-inference, inline);"
-                     x="693.25" y="185.27081" id="text7-3" inkscape:label="inferenceLabel">
+                  <text xml:space="preserve" style="font-size:21.3333px;font-family:arial;-inkscape-font-specification:arial;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;opacity:0.860725;fill:#ffcc00;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.581339;paint-order:fill markers stroke;
+                     display:var(--show-inference, inline);" x="693.25" y="185.27081" id="text7-3"
+                     inkscape:label="inferenceLabel">
                      <tspan sodipodi:role="line" id="tspan7-6" x="693.25" y="185.27081"
                         style="font-size:21.3333px;fill:#000000">Inference</tspan>
                   </text>
@@ -353,7 +267,7 @@
             <!-- Instancia Switch A -->
             <g id="switch-a" transform="matrix(0.99992533,0,0,0.99992533,49.997341,39.998601)">
                <!-- Etiqueta específica para esta instancia -->
-               <use xlink:href="#g10" id="switchA" transform="translate(-663.1128,-119.64015)" 
+               <use xlink:href="#g10" id="switchA" transform="translate(-663.1128,-119.64015)"
                   inkscape:label="switchA" />
                <text x="63.743423" y="10.844433" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px"
                   fill="#dddddd" id="switch-label-a" data-name="Switch A" style="font-size:16.0012px">Switch A</text>
@@ -364,8 +278,7 @@
                <text x="89.619743" y="-15.099602" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px"
                   fill="#dddddd" id="switch-label-b" data-name="Switch B" style="font-size:16px">Switch B</text>
                <use xlink:href="#g10" id="switchB" transform="translate(-637.56464,-145.5899)"
-                  style="--show-inference: none; --show-registers: none;"
-                  inkscape:label="switchB" />
+                  style="--show-inference: none; --show-registers: none;" inkscape:label="switchB" />
             </g>
             <!-- Instancia Switch C -->
             <g id="switch-c" transform="translate(570,65.942477)">
@@ -373,8 +286,7 @@
                <text x="77.726685" y="-15.099602" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px"
                   fill="#dddddd" id="switch-label-c" data-name="Switch C" style="font-size:16px">Switch C</text>
                <use xlink:href="#g10" id="switchC" transform="translate(-649.37566,-145.5899)"
-                  style="--show-inference: none; --show-registers: none"
-                  inkscape:label="swithcC" />
+                  style="--show-inference: none; --show-registers: none" inkscape:label="swithcC" />
             </g>
          </g>
          <g inkscape:groupmode="layer" id="layer1" inkscape:label="Cable layer"
@@ -585,7 +497,7 @@
             packetRect.setAttribute('y', -packetHeight / 2);
             packetRect.setAttribute('rx', packetHeight / 4);
             packetRect.setAttribute('ry', packetHeight / 4);
-            
+
             packetGroup.dataset.classified = 'false';
             packetGroup.dataset.packetClass = packetClass;
             packetGroup.dataset.previousSwitchId = 'none';
@@ -768,43 +680,43 @@
                   // --- Remove element ---
                   const finishedGroup = anim.animatables[0]?.target;
                   if (finishedGroup) {
-                      finishedGroup.remove();
+                     finishedGroup.remove();
                   }
                }
             }); // end anime
 
             activePacketAnimations.push(packetAnimation);
 
-            
+
          }
 
          function scheduleNextPacket() {
             // 1. Check Pause State
             if (isPaused) {
-                  // If paused, just check again later. Don't create packet.
-                  setTimeout(scheduleNextPacket, maxInterval); // Check periodically
-                  return;
+               // If paused, just check again later. Don't create packet.
+               setTimeout(scheduleNextPacket, maxInterval); // Check periodically
+               return;
             }
 
             // 2. Check Packet Limit
             // Query *inside* scheduleNextPacket to get current count
             const animatedPackets = packetLayer.querySelectorAll('g.packet-group');
             if (animatedPackets.length >= 20) {
-                  console.warn(`Packet limit (${animatedPackets.length}) reached. Waiting...`);
-                  // Wait a bit longer before checking limit again
-                  setTimeout(scheduleNextPacket, 1000);
-                  return;
+               console.warn(`Packet limit (${animatedPackets.length}) reached. Waiting...`);
+               // Wait a bit longer before checking limit again
+               setTimeout(scheduleNextPacket, 1000);
+               return;
             }
 
             // 3. Calculate Delay and Schedule Creation
             const randomInterval = minInterval + Math.random() * (maxInterval - minInterval);
             setTimeout(() => {
-                  // Double-check pause state *before* creating
-                  if (!isPaused) {
-                     createAndAnimatePacket(); // Create the packet
-                  }
-                  // IMPORTANT: Whether created or not (due to pause), schedule the *next* check/creation attempt.
-                  scheduleNextPacket();
+               // Double-check pause state *before* creating
+               if (!isPaused) {
+                  createAndAnimatePacket(); // Create the packet
+               }
+               // IMPORTANT: Whether created or not (due to pause), schedule the *next* check/creation attempt.
+               scheduleNextPacket();
             }, randomInterval);
 
          } // --- END scheduleNextPacket --- // --- Button Controllers (Logic looks correct now) ---
@@ -812,32 +724,32 @@
          const pauseButton = document.getElementById('pause-button');
 
          pauseButton.onclick = () => {
-             if (!isPaused) {
-                 [...activePacketAnimations].forEach(animInstance => {
-                     if (animInstance && !animInstance.paused) {
-                          animInstance.pause();
-                     }
-                 });
-                 isPaused = true;
-                 pauseButton.style.display = 'none';
-                 playButton.style.display = 'inline-block';
-                 console.log('Animations Paused (Creation Halted)');
-                 // No need to call scheduleNextPacket here, loop stops itself
-             }
+            if (!isPaused) {
+               [...activePacketAnimations].forEach(animInstance => {
+                  if (animInstance && !animInstance.paused) {
+                     animInstance.pause();
+                  }
+               });
+               isPaused = true;
+               pauseButton.style.display = 'none';
+               playButton.style.display = 'inline-block';
+               console.log('Animations Paused (Creation Halted)');
+               // No need to call scheduleNextPacket here, loop stops itself
+            }
          };
 
          playButton.onclick = () => {
-             if (isPaused) {
-                  isPaused = false; // Set state FIRST
-                 [...activePacketAnimations].forEach(animInstance => {
-                     if (animInstance && animInstance.paused) {
-                          animInstance.play();
-                     }
-                 });
-                 playButton.style.display = 'none';
-                 pauseButton.style.display = 'inline-block';
-                 console.log('Animations Played (Creation Resumed)');
-             }
+            if (isPaused) {
+               isPaused = false; // Set state FIRST
+               [...activePacketAnimations].forEach(animInstance => {
+                  if (animInstance && animInstance.paused) {
+                     animInstance.play();
+                  }
+               });
+               playButton.style.display = 'none';
+               pauseButton.style.display = 'inline-block';
+               console.log('Animations Played (Creation Resumed)');
+            }
          };
 
 
