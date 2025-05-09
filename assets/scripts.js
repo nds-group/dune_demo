@@ -550,7 +550,16 @@ window.state_demo = 0; // 0: idle, 1: demo running
 function showAnimation(htmlFile) {
   console.log('showAnimation', htmlFile);
   const frame = document.getElementById('animation-frame');
+
+
   if (frame) {
+
+    if (frame.dataset.htmlFile && frame.dataset.htmlFile === htmlFile) {
+      window.isAnimationPaused = !window.isAnimationPaused;
+      return; // No need to change if it's the same file
+    }
+
+    frame.dataset.htmlFile = htmlFile;
     frame.src = htmlFile;
     // Ensure parent is visible if it was hidden
     if (frame) {
@@ -591,14 +600,14 @@ function stopChartUpdate() {
     }
   });
 
-  showAnimation(''); // Hide animation frame
+  //showAnimation(''); // Hide animation frame
   window.currentUpdater = null;
   console.log("Chart update stopped. Current updater:", window.currentUpdater);
 }
 
 function toggleChartUpdate(updaterName) {
   if (window.currentUpdater === updaterName) {
-    showAnimation('');
+    window.isAnimationPaused = true; // Pause animation if already running
     stopChartUpdate();
     return;
   }

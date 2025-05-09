@@ -316,6 +316,7 @@
       document.addEventListener('DOMContentLoaded', function () {
 
          let activePacketAnimations = [];
+         window.parent.isAnimationPaused = false;
          let isPaused = false;
 
          const svg = document.getElementById('network-svg');
@@ -675,6 +676,33 @@
          }
 
          function scheduleNextPacket() {
+
+            if (window.parent.isAnimationPaused) {
+            if (!isPaused) {
+               [...activePacketAnimations].forEach(animInstance => {
+                  if (animInstance && !animInstance.paused) {
+                     animInstance.pause();
+                  }
+               });
+               window.parent.isAnimationPaused = true;
+               isPaused = true;
+               console.log('Animations Paused (Creation Halted)');
+               // No need to call scheduleNextPacket here, loop stops itself
+            }
+         }
+         else {
+            if (isPaused) {
+               isPaused = false; // Set state FIRST
+               [...activePacketAnimations].forEach(animInstance => {
+                  if (animInstance && animInstance.paused) {
+                     animInstance.play();
+                  }
+               });
+               console.log('Animations Played (Creation Resumed)');
+            }
+         }
+
+
             // 1. Check Pause State
             if (isPaused) {
                // If paused, just check again later. Don't create packet.
@@ -702,39 +730,11 @@
                // IMPORTANT: Whether created or not (due to pause), schedule the *next* check/creation attempt.
                scheduleNextPacket();
             }, randomInterval);
+     
 
          } // --- END scheduleNextPacket --- // --- Button Controllers (Logic looks correct now) ---
          const playButton = document.getElementById('play-button');
          const pauseButton = document.getElementById('pause-button');
-
-         pauseButton.onclick = () => {
-            if (!isPaused) {
-               [...activePacketAnimations].forEach(animInstance => {
-                  if (animInstance && !animInstance.paused) {
-                     animInstance.pause();
-                  }
-               });
-               isPaused = true;
-               pauseButton.style.display = 'none';
-               playButton.style.display = 'inline-block';
-               console.log('Animations Paused (Creation Halted)');
-               // No need to call scheduleNextPacket here, loop stops itself
-            }
-         };
-
-         playButton.onclick = () => {
-            if (isPaused) {
-               isPaused = false; // Set state FIRST
-               [...activePacketAnimations].forEach(animInstance => {
-                  if (animInstance && animInstance.paused) {
-                     animInstance.play();
-                  }
-               });
-               playButton.style.display = 'none';
-               pauseButton.style.display = 'inline-block';
-               console.log('Animations Played (Creation Resumed)');
-            }
-         };
 
          scheduleNextPacket();
 
