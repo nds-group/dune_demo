@@ -12,7 +12,6 @@
 </head>
 
 <body>
-   <h1>JEWEL</h1>
    <div style="text-align: center; margin-bottom: 20px; display:none">
       <button id="play-button" style="padding: 10px 20px; display: none;">Play</button>
       <button id="pause-button" style="padding: 10px 20px;">Pause</button>
@@ -111,22 +110,22 @@
                      width="10.09952" height="7.6979146" x="635.21362" y="183.21252" rx="1.029658" ry="0.4263173"
                      inkscape:label="tableC" />
                   <rect style="opacity:0.860725;fill:var(--yellow);stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2, 6;stroke-dashoffset:2;stroke-opacity:0.890196;paint-order:fill markers stroke;
-                        display:var(--show-inference, inline);" id="rect4" width="115.02833" height="29.871696"
-                     x="680.36133" y="163.17972" rx="4" ry="4" inkscape:label="inferenceBlock" />
+                     display:var(--show-inference, inline);" id="rect4" width="115.02833" height="29.871696" x="670"
+                     y="163.17972" rx="4" ry="4" inkscape:label="inferenceBlock" />
                   <rect
                      style="opacity:0.860725;fill:var(--green);stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2, 6;stroke-dashoffset:2;stroke-opacity:0.890196;paint-order:fill markers stroke"
-                     id="rect5" width="115.02833" height="29.871696" x="680.36133" y="204.50464" rx="4" ry="4"
+                     id="rect5" width="115.02833" height="29.871696" x="670" y="204.50464" rx="4" ry="4"
                      inkscape:label="forwardBlock" />
                   <text xml:space="preserve"
                      style="font-size:21.3333px;font-family:arial;-inkscape-font-specification:arial;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;opacity:0.860725;fill:#ffcc00;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.581339;paint-order:fill markers stroke"
                      x="692.9364" y="227.30197" id="text7" inkscape:label="forwardLabel">
-                     <tspan sodipodi:role="line" id="tspan7" x="692.9364" y="227.30197"
+                     <tspan sodipodi:role="line" id="tspan7" x="690" y="227.30197"
                         style="font-size:21.3333px;fill:#000000">Forward</tspan>
                   </text>
                   <text xml:space="preserve" style="font-size:21.3333px;font-family:arial;-inkscape-font-specification:arial;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;opacity:0.860725;fill:#ffcc00;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.581339;paint-order:fill markers stroke;
-                     display:var(--show-inference, inline);" x="693.25" y="185.27081" id="text7-3"
+                     display:var(--show-inference, inline);" x="685" y="185.27081" id="text7-3"
                      inkscape:label="inferenceLabel">
-                     <tspan sodipodi:role="line" id="tspan7-6" x="693.25" y="185.27081"
+                     <tspan sodipodi:role="line" id="tspan7-6" x="685" y="185.27081"
                         style="font-size:21.3333px;fill:#000000">Inference</tspan>
                   </text>
                </g>
@@ -321,6 +320,8 @@
 
 
    </div>
+   <h1>JEWEL</h1>
+
 
    <script>
 
@@ -330,6 +331,7 @@
 
          let activePacketAnimations = [];
          let isPaused = false;
+         window.parent.isAnimationPaused = false;
 
          const svg = document.getElementById('network-svg');
          const packetLayer = document.getElementById('packet-layer');
@@ -692,6 +694,31 @@
 
          function scheduleNextPacket() {
             // 1. Check Pause State
+            if (window.parent.isAnimationPaused) {
+               if (!isPaused) {
+                  [...activePacketAnimations].forEach(animInstance => {
+                     if (animInstance && !animInstance.paused) {
+                        animInstance.pause();
+                     }
+                  });
+                  window.parent.isAnimationPaused = true;
+                  isPaused = true;
+                  console.log('Animations Paused (Creation Halted)');
+                  // No need to call scheduleNextPacket here, loop stops itself
+               }
+            }
+            else {
+               if (isPaused) {
+                  isPaused = false; // Set state FIRST
+                  [...activePacketAnimations].forEach(animInstance => {
+                     if (animInstance && animInstance.paused) {
+                        animInstance.play();
+                     }
+                  });
+                  console.log('Animations Played (Creation Resumed)');
+               }
+            }
+
             if (isPaused) {
                // If paused, just check again later. Don't create packet.
                setTimeout(scheduleNextPacket, maxInterval); // Check periodically
