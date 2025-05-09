@@ -108,8 +108,9 @@
                      style="opacity:0.860725;stroke:none;stroke-width:0.331272;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.331272, 0.993814;stroke-dashoffset:0.331272;stroke-opacity:0.890196;paint-order:fill markers stroke"
                      id="symbol-tableC" class="table-rect-common" width="10.09952" height="7.6979146" x="635.21362"
                      y="183.21252" rx="1.029658" ry="0.4263173" inkscape:label="tableC" />
-                  <rect style="opacity:0.860725;fill:var(--yellow);stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2, 6;stroke-dashoffset:2;stroke-opacity:0.890196;paint-order:fill markers stroke;
-                     display:var(--show-inference, inline);" id="rect4" width="115.02833" height="29.871696" x="670"
+                  <rect style="opacity:0.860725;fill:var(--yellow);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2, 6;stroke-dashoffset:2;stroke-opacity:0.890196;paint-order:fill markers stroke;
+                     display:var(--show-inference, inline);
+                     stroke:var(--inference-color,none)" id="rect4" width="115.02833" height="29.871696" x="670"
                      y="163.17972" rx="4" ry="4" inkscape:label="inferenceBlock" />
                   <rect
                      style="opacity:0.860725;fill:var(--green);stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2, 6;stroke-dashoffset:2;stroke-opacity:0.890196;paint-order:fill markers stroke"
@@ -251,12 +252,12 @@
                </g>
             </symbol>
          </defs>
-         <g id="switch-layer" transform="translate(67.647795,3.8892291)">
+         <g id="switch-layer" transform="translate(67.647795,3.8892291)" style="stroke()">
             <!-- Instance Switch A -->
             <g id="switch-a" transform="matrix(0.99992533,0,0,0.99992533,49.997341,39.998601)">
                <!-- Instance label -->
-               <use xlink:href="#g10" id="switchA" transform="translate(-663.1128,-119.64015)"
-                  inkscape:label="switchA" />
+               <use xlink:href="#g10" id="switchA" transform="translate(-663.1128,-119.64015)" inkscape:label="switchA"
+                  style="--inference-color:var(--class-A);" />
                <text x="63.743423" y="10.844433" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px"
                   fill="#dddddd" id="switch-label-a" data-name="Switch A" style="font-size:16.0012px">Switch A</text>
             </g>
@@ -265,16 +266,16 @@
                <!-- Instance label -->
                <text x="89.619743" y="-15.099602" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px"
                   fill="#dddddd" id="switch-label-b" data-name="Switch B" style="font-size:16px">Switch B</text>
-               <use xlink:href="#g10" id="switchB" transform="translate(-637.56464,-145.5899)"
-                  inkscape:label="switchB" />
+               <use xlink:href="#g10" id="switchB" transform="translate(-637.56464,-145.5899)" inkscape:label="switchB"
+                  style="--inference-color:var(--class-B);" />
             </g>
             <!-- Instance Switch C -->
             <g id="switch-c" transform="translate(570,65.942477)">
                <!-- Instance label -->
                <text x="77.726685" y="-15.099602" text-anchor="middle" font-family="Arial, sans-serif" font-size="12px"
                   fill="#dddddd" id="switch-label-c" data-name="Switch C" style="font-size:16px">Switch C</text>
-               <use xlink:href="#g10" id="switchC" transform="translate(-649.37566,-145.5899)"
-                  inkscape:label="swithcC" />
+               <use xlink:href="#g10" id="switchC" transform="translate(-649.37566,-145.5899)" inkscape:label="swithcC"
+                  style="--inference-color:var(--class-C);" />
             </g>
          </g>
          <g inkscape:groupmode="layer" id="layer1" inkscape:label="Cable layer"
@@ -319,11 +320,15 @@
          const packetLayer = document.getElementById('packet-layer');
          const NS = "http://www.w3.org/2000/svg";
 
-         const packetClasses = ['A', 'B', 'C'];
+         const packetClasses = ['A', 'B', 'C', 'D', 'E', 'F'];
          const packetDistributionConfig = {
-            'A': 40,
-            'B': 30,
-            'C': 30,
+            'A': 25,
+            'B': 25,
+            'C': 25,
+            'D': 8,
+            'E': 8,
+            'F': 8,
+
          };
 
          const animationDuration = 12000; // ms
@@ -331,14 +336,35 @@
          const maxInterval = 1400;  // ms
          const packetHeight = 12;
          const minPacketWidth = 12;
-         const maxPacketWidth = 20;
+         const maxPacketWidth = 25;
          const inferenceOffsetY = -25;
          const forwardOffsetY = 20;
 
          const classificationCounts = {
-            'A': 0,
-            'B': 0,
-            'C': 0
+            'switch-a': {
+               'A': 0,
+               'B': 0,
+               'C': 0,
+               'D': 0,
+               'E': 0,
+               'F': 0
+            },
+            'switch-b': {
+               'A': 0,
+               'B': 0,
+               'C': 0,
+               'D': 0,
+               'E': 0,
+               'F': 0
+            },
+            'switch-c': {
+               'A': 0,
+               'B': 0,
+               'C': 0,
+               'D': 0,
+               'E': 0,
+               'F': 0
+            }
          };
 
          const switchEntryAndExit = {
@@ -348,12 +374,38 @@
          };
 
          const classToTableLabel = {
-            'A': 'tableA',
-            'B': 'tableB',
-            'C': 'tableC'
+            'switch-a': {
+               'A': 'tableA',
+               'D': 'tableB',
+
+               'B': 'tableC',
+               'C': 'tableC',
+               'E': 'tableC',
+               'F': 'tableC'
+            },
+            'switch-b': {
+               'B': 'tableA',
+               'E': 'tableB',
+
+               'A': 'tableC',
+               'C': 'tableC',
+               'D': 'tableC',
+               'F': 'tableC'
+            },
+            'switch-c': {
+               'C': 'tableA',
+               'F': 'tableB',
+
+               'A': 'tableC',
+               'B': 'tableC',
+               'D': 'tableC',
+               'E': 'tableC'
+            },
+
          };
 
          const classifyThreshold = 4;
+         const otherClassThreshold = 4;
          const classConfig = {
             'A': {
                colorClass: 'classified-A',
@@ -363,7 +415,8 @@
                   'switch-b': { action: 'forward' },
                   'switch-c': { action: 'forward' }
                },
-               classificationSwitch: 'switch-a'
+               classificationSwitch: 'switch-a',
+               packetWidth: minPacketWidth,
             },
             'B': {
                colorClass: 'classified-B',
@@ -373,7 +426,8 @@
                   'switch-b': { action: 'inference' },
                   'switch-c': { action: 'forward' }
                },
-               classificationSwitch: 'switch-b'
+               classificationSwitch: 'switch-b',
+               packetWidth: minPacketWidth,
             },
             'C': {
                colorClass: 'classified-C',
@@ -383,8 +437,42 @@
                   'switch-b': { action: 'inference' },
                   'switch-c': { action: 'inference' }
                },
-               classificationSwitch: 'switch-c'
-            }
+               classificationSwitch: 'switch-c',
+               packetWidth: minPacketWidth,
+            },
+            'D': {
+               colorClass: 'classified-A',
+               classifyThreshold: classifyThreshold,
+               behavior: {
+                  'switch-a': { action: 'inference' },
+                  'switch-b': { action: 'forward' },
+                  'switch-c': { action: 'forward' }
+               },
+               classificationSwitch: 'switch-a',
+               packetWidth: maxPacketWidth,
+            },
+            'E': {
+               colorClass: 'classified-B',
+               classifyThreshold: classifyThreshold,
+               behavior: {
+                  'switch-a': { action: 'inference' },
+                  'switch-b': { action: 'inference' },
+                  'switch-c': { action: 'forward' }
+               },
+               classificationSwitch: 'switch-b',
+               packetWidth: maxPacketWidth,
+            },
+            'F': {
+               colorClass: 'classified-C',
+               classifyThreshold: classifyThreshold,
+               behavior: {
+                  'switch-a': { action: 'inference' },
+                  'switch-b': { action: 'inference' },
+                  'switch-c': { action: 'inference' }
+               },
+               classificationSwitch: 'switch-c',
+               packetWidth: maxPacketWidth,
+            },
          };
 
          const mainPathId = 'package-path';
@@ -466,7 +554,7 @@
             packetGroup.setAttribute('class', 'packet-group');
 
             const packetRect = document.createElementNS(NS, 'rect');
-            const randomWidth = minPacketWidth + Math.random() * (maxPacketWidth - minPacketWidth);
+            const randomWidth = config.packetWidth
 
             packetRect.setAttribute('class', 'packet');
             packetRect.setAttribute('width', randomWidth);
@@ -485,7 +573,6 @@
             packetGroup.appendChild(packetRect);
             packetLayer.appendChild(packetGroup);
             // --- End creating group ---
-
 
             const motionPath = anime.path(pathElement);
 
@@ -531,17 +618,16 @@
                   if (isInSwitch) {
                      const targetSwitchElement = document.getElementById(currentSwitchId);
                      const isClassificationSwitch = (currentSwitchId === classConf.classificationSwitch);
-                     const threshold = classConf.classifyThreshold;
-                     const currentCount = classificationCounts[pClass]; // Global count for this class
-                     const tableLabel = classToTableLabel[pClass];
+                     const tableLabel = classToTableLabel[currentSwitchId][pClass];
 
                      // --- A. Entered a NEW switch this frame? ---
                      if (currentSwitchId !== previousSwitchId) {
                         // --- Determine the initial path FOR THIS VISIT based on state AT ENTRY ---
                         let initialAction; // Start undefined
 
-                        // Get the configured action for this specific switch, default to 'forward' if undefined
-                        const configuredAction = classConf.behavior[currentSwitchId] ? classConf.behavior[currentSwitchId].action : 'forward';
+                        // Increase counter for this class in this switch (entering)
+                        classificationCounts[currentSwitchId][pClass]++;
+                        const currentTotalCountForClassInSwitch = classificationCounts[currentSwitchId][pClass];
 
                         // --- Apply Path Decision Rules ---
 
@@ -551,7 +637,7 @@
                         }
                         // Rule 2 & 3: If entering its designated CLASSIFICATION switch...
                         else if (isClassificationSwitch) {
-                           if (currentCount >= threshold) {
+                           if (currentTotalCountForClassInSwitch > classConf.classifyThreshold) { // If countSi el conteo total EXCEDE el umbral
                               initialAction = 'forward';
                            } else {
                               initialAction = 'inference'; // Rule 3: Threshold not met, take inference path (will infer/color mid-switch)
@@ -559,7 +645,12 @@
                         }
                         // Rule 4 & 5: If entering a switch BEFORE its classification switch...
                         else {
-                           initialAction = configuredAction; // Use the action defined in classConfig for this switch
+                           const configuredAction = classConf.behavior[currentSwitchId] ? classConf.behavior[currentSwitchId].action : 'forward';
+                           if (currentTotalCountForClassInSwitch > otherClassThreshold) {
+                              initialAction = 'forward'; // Clasificado como "otro" debido al umbral, toma ruta forward
+                           } else {
+                              initialAction = configuredAction; // Sigue la acción configurada
+                           }
                         }
                         // --- End Path Decision Rules ---
 
@@ -571,17 +662,17 @@
                         yOffset = committedOffsetY; // Use the newly committed offset immediately
 
                         // Handle subsequent switch table coloring ON ENTRY (if packet was already classified)
-                        if (packetIsClassified && !isClassificationSwitch && targetSwitchElement && tableLabel) {
-                           const dataAttributeName = getTableColoredDataAttribute(tableLabel);
-                           if (dataAttributeName && targetSwitchElement.dataset[dataAttributeName] !== 'true') {
-                              const targetColor = getComputedStyle(document.documentElement).getPropertyValue(`--class-${pClass}`).trim();
-                              const variableName = getTableCssVariable(tableLabel);
-                              if (variableName && targetColor) {
-                                 targetSwitchElement.style.setProperty(variableName, targetColor);
-                                 targetSwitchElement.dataset[dataAttributeName] = 'true';
-                              }
-                           }
-                        }
+                        // if (packetIsClassified && !isClassificationSwitch && targetSwitchElement && tableLabel) {
+                        //    const dataAttributeName = getTableColoredDataAttribute(tableLabel);
+                        //    if (dataAttributeName && targetSwitchElement.dataset[dataAttributeName] !== 'true') {
+                        //       const targetColor = getComputedStyle(document.documentElement).getPropertyValue(`--class-${pClass}`).trim();
+                        //       const variableName = getTableCssVariable(tableLabel);
+                        //       if (variableName && targetColor) {
+                        //          targetSwitchElement.style.setProperty(variableName, targetColor);
+                        //          targetSwitchElement.dataset[dataAttributeName] = 'true';
+                        //       }
+                        //    }
+                        // }
 
                      } else {
                         // --- B. Still inside the SAME switch ---
@@ -610,24 +701,16 @@
                               }
                               // END: PING ANIMATION TRIGGER
 
-                              if (currentCount < threshold) {
-                                 classificationCounts[pClass]++;
-
-                                 // Check if THIS classification just hit the threshold - color table
-                                 if (classificationCounts[pClass] === threshold) {
-                                    const variableName = getTableCssVariable(tableLabel);
-                                    const targetColor = getComputedStyle(document.documentElement).getPropertyValue(`--class-${pClass}`).trim();
-                                    if (targetSwitchElement && variableName && targetColor) {
-                                       targetSwitchElement.style.setProperty(variableName, targetColor);
-                                       const dataAttrName = getTableColoredDataAttribute(tableLabel);
-                                       if (dataAttrName) targetSwitchElement.dataset[dataAttrName] = 'true';
-                                    }
+                              if (classificationCounts[currentSwitchId][pClass] === classConf.classifyThreshold) {
+                                 const variableName = getTableCssVariable(tableLabel);
+                                 const targetColor = getComputedStyle(document.documentElement).getPropertyValue(`--class-${pClass}`).trim();
+                                 if (targetSwitchElement && variableName && targetColor) {
+                                    targetSwitchElement.style.setProperty(variableName, targetColor);
+                                    const dataAttrName = getTableColoredDataAttribute(tableLabel);
+                                    if (dataAttrName) targetSwitchElement.dataset[dataAttrName] = 'true';
                                  }
-                              } else {
-                                 // This branch handles the case where threshold was already met, but the packet
-                                 // started this switch visit unclassified (and took the 'forward' path due to Rule 2)
-                                 // Now it just gets colored.
                               }
+
                               // Packet is now colored, but yOffset remains locked to committedOffsetY
                            }
                         } // End if (isClassificationSwitch && !packetIsClassified)

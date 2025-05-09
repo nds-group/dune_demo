@@ -7,7 +7,9 @@
     --class-A: var(--red);
     --class-B: var(--blue);
     --class-C: var(--purple);
-    --class-D: var(--yellow);
+    --class-D: var(--red);
+    --class-E: var(--blue);
+    --class-F: var(--purple);
  }
 
  body {
