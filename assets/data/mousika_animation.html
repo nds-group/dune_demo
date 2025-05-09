@@ -356,7 +356,7 @@
             'C': 'tableC'
          };
 
-         const classifyThreshold = 4;
+         const classifyThreshold = -1;
          const classConfig = {
             'A': {
                colorClass: 'classified-A',
@@ -557,7 +557,7 @@
                         }
                         // Rule 2 & 3: If entering its designated CLASSIFICATION switch...
                         else if (isClassificationSwitch) {
-                           if (currentCount >= threshold) {
+                           if (currentCount >= threshold && threshold > 0) {
                               initialAction = 'forward';
                            } else {
                               initialAction = 'inference'; // Rule 3: Threshold not met, take inference path (will infer/color mid-switch)
