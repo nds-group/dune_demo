@@ -1,160 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Dashboard - Dark Style</title>
 
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Montserrat"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard - Dark Style</title>
 
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link rel="stylesheet" href="assets/styles.css" />
-  </head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
 
-  <body>
-    <div id="wrapper">
-      <div class="content-area">
-        <div class="container-fluid">
-          <!-- <div class="text-right mt-2 d-fixed">
-            <button id="toggleNoInference" class="default-button">NO INFERENCE</button>
-            <button id="toggleMousika" class="default-button">MOUSIKA</button>
-            <button id="toggleJewel" class="default-button">JEWEL</button>
-            <button id="toggleDune" class="default-button">DUNE</button>
-          </div> -->
-          <div class="" id="header">
-            <div class="d-inline-block text-center mr-3">
-              <button id="toggleNoInference" class="default-button">NO INFERENCE</button>
-            </div>
-            <div class="d-inline-block text-center mr-3">
-              <button id="toggleMousika" class="default-button">MOUSIKA</button>
-              <div class="button-label">Packet-level</div>
-            </div>
-            <div class="d-inline-block text-center mr-2">
-              <button id="toggleJewel" class="default-button">JEWEL</button>
-              <div class="button-label">Joint packet <br> & flow-level</div>
-            </div>
-            <div class="d-inline-block text-center">
-              <button id="toggleDune" class="default-button">DUNE</button>
-              <div class="button-label">Distributed Joint <br>packet & flow-level</div>
-            </div>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="assets/topology_animations.css" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body>
+  <div id="wrapper">
+    <div class="content-area">
+      <div class="" id="header">
+        <div class="title">
+          <div class="IMDEA-logo header-logo">
+            <img src="assets/imdea-networks-white background.png" alt="IMDEA-logo" />
           </div>
-          <div class="main">
-            <div class="row">
-              <div class="col-md-6 panel">
-                <div id="frame" class="box columnbox" title="Topology">
-                  <div id="columnchart"></div>
-                   <!-- Animation container -->
-                    <h2 class="chart-title">User Plane Topology</h2>
-                    <iframe id="animation-frame" src="" width="100%" height="100%" style="border:none;"></iframe>
-                </div>
-              </div>
-              <div id="frame" class="col-md-6 panel">
-                <div class="box">
-                  <div id="linechart"></div>
-                </div>
-              </div>
-            </div>
 
-            <div class="row">
-              <div class="col-md-6 panel">
-                <div id="frame" class="box mt-4">
-                  <h2 class="chart-title">Classification Accuracy</h2>
-                  <div>
-                    <div id="combinedPerformance"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 panel">
-                <div id="frame" class="box mt-4">
-                  <h2 class="chart-title">Traffic Switching Latency (ns)</h2>
-                  <div class="latency-charts">
-                    <div class="">
-                      <div id="noInference"></div>
-                    </div>
-                    <div class="">
-                      <div id="Mousika"></div>
-                    </div>
-                    <div class="">
-                      <div id="Jewel"></div>
-                    </div>
-                    <div class="">
-                      <div id="Dune"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- <div class="row">
-              <div class="float-left IMDEA-logo">
-                <a
-                  target="_blank"
-                  ><img src="assets/IMDEA-logo.png" alt="IMDEA-logo"
-                /></a>
-              </div>
-              <div class="float-right SNS-6G">
-                <a
-                  target="_blank"
-                  ><img src="assets/6G-SNS.png" alt="SNS-6G"
-                /></a>
-              </div>
-            </div> -->
-
-            <!-- <div class="row justify-content-between align-items-center px-3">
-              <div class="IMDEA-logo">
-                <img src="assets/IMDEA-logo.png" alt="IMDEA-logo"/>
-              </div>
-              <div class="EU">
-                <img src="assets/UE_Logo.png" alt="EU" />
-              </div>
-              <div class="SNS-6G">
-                <img src="assets/6G-SNS.png" alt="SNS-6G" />
-              </div>
-              <div class="Madrid-logo">
-                <img src="assets/Comunidad_de_Madrid_Logo.png" alt="Madrid-logo"/>
-              </div>
-            </div> -->
-
-            <div class="row justify-content-between align-items-center px-2 pt-2 pb-1" id="footer">
-              <div class="logos-left">
-                <div class="IMDEA-logo">
-                  <img src="assets/IMDEA-logo.png" alt="IMDEA-logo"/>
-                </div>
-                <div class="EU">
-                  <img src="assets/UE_Logo.png" alt="EU" />
-                </div>
-              </div>
-              <div class="logos-right">
-                <div class="SNS-6G">
-                  <img src="assets/6G-SNS.png" alt="SNS-6G" />
-                </div>
-                <div class="Madrid-logo">
-                  <img src="assets/Comunidad_de_Madrid_Logo.png" alt="Madrid-logo"/>
-                </div>
-              </div>
-            </div>            
-            
-
-          </div>
+          <h1>
+            <span>DUNE:</span> Distributed Inference in the User Plane
+          </h1>
         </div>
+        <div class="experiments-nav">
+          <div class="d-inline-block text-center mr-3">
+            <button id="toggleNoInference" class="default-button">NO INFERENCE</button>
+          </div>
+          <div class="d-inline-block text-center mr-3">
+            <button id="toggleMousika" class="default-button">MOUSIKA</button>
+            <div class="button-label">Packet-level</div>
+          </div>
+          <div class="d-inline-block text-center mr-2">
+            <button id="toggleJewel" class="default-button">JEWEL</button>
+            <div class="button-label">Joint packet <br> & flow-level</div>
+          </div>
+          <div class="d-inline-block text-center">
+            <button id="toggleDune" class="default-button">DUNE</button>
+            <div class="button-label">Distributed Joint <br>packet & flow-level</div>
+          </div>
         </div>
       </div>
-    </div>
+      <div class="main">
+        <div class="panel">
+          <div id="frame" class="box columnbox" title="Topology">
+            <div id="columnchart"></div>
+            <!-- Animation container -->
+            <h2 class="chart-title">User Plane Topology</h2>
+            <iframe id="animation-frame" src="" width="100%" height="100%" style="border:none;"></iframe>
+          </div>
+        </div>
+        <div id="frame" class="panel">
+          <div class="box">
+            <h2 class="chart-title">Macro F1-Score</h2>
 
-    <script src="/assets/jquery.slim.min.js"></script>
-    <script src="/assets/moment.min.js"></script>
-    <script src="/assets/apexcharts.js"></script>
-    <script src="/assets/scripts.js"></script>
-  </body>
+            <div id="linechart"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div id="frame" class="box">
+            <h2 class="chart-title">Classification Accuracy</h2>
+            <div>
+              <div id="combinedPerformance"></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div id="frame" class="box">
+            <h2 class="chart-title">Traffic Switching Latency (ns)</h2>
+            <div class="latency-charts">
+              <div class="">
+                <div id="noInference"></div>
+              </div>
+              <div class="">
+                <div id="Mousika"></div>
+              </div>
+              <div class="">
+                <div id="Jewel"></div>
+              </div>
+              <div class="">
+                <div id="Dune"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+      <div class="footer">
+
+        <div class="logos-left logos">
+          <div class="origami-logo">
+            <img src="assets/origami.png" alt="SNS-Origami" />
+          </div>
+          <div class="EU">
+            <img src="assets/UE_Logo.png" alt="EU" />
+          </div>
+        </div>
+
+        <div class="copyright">
+          <p>
+            DUNE: Distributed Inference in the User Plane
+          </p>
+          <p>B. BÜTÜN, D. de Andres Hernandez, M. Gucciardo, M. Fiore. IEEE INFOCOM, 2025.</p>
+
+          <div class="links">
+
+            <a href="https://zenodo.org/records/14718514" target="_blank">
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="199" height="20">
+                <linearGradient id="b" x2="0" y2="100%">
+                  <stop offset="0" stop-color="#bbb" stop-opacity=".1"></stop>
+                  <stop offset="1" stop-opacity=".1"></stop>
+                </linearGradient>
+                <mask id="a" width="196.078125" height="20">
+                  <rect width="196.078125" height="20" rx="3" fill="#fff"></rect>
+                </mask>
+                <g mask="url(#a)">
+                  <path fill="#555" d="M0 0h31.375v20H0z"></path>
+                  <path fill="#007ec6" d="M31.375 0h164.703125v20H31.375z"></path>
+                  <path fill="url(#b)" d="M0 0h196.078125v20H0z"></path>
+                </g>
+                <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,
+                                            Verdana,Geneva,sans-serif" font-size="10">
+                  <text x="16.1875" y="15" fill="#010101" fill-opacity=".3">
+                    DOI
+                  </text>
+                  <text x="16.1875" y="14">
+                    DOI
+                  </text>
+                  <text x="113.2265625" y="15" fill="#010101" fill-opacity=".3">
+                    10.5281/zenodo.14718514
+                  </text>
+                  <text x="113.2265625" y="14">
+                    10.5281/zenodo.14718514
+                  </text>
+                </g>
+              </svg>
+            </a>
+
+            <a href="https://github.com/nds-group/Dune" target="_blank" class="github-link"
+              title="DUNE: Distributed Inference in the User Plane at Github">
+              <img src="assets/github-icon.png" alt="Github" class="github-icon" />
+              See at Github
+            </a>
+
+          </div>
+
+        </div>
+
+        <div class="logos-right logos">
+          <div class="SNS-6G">
+            <img src="assets/6G-SNS.png" alt="SNS-6G" />
+          </div>
+          <div class="Madrid-logo">
+            <img src="assets/Comunidad_de_Madrid_Logo.png" alt="Comunidad de Madrid" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script src="/assets/jquery.slim.min.js"></script>
+  <script src="/assets/moment.min.js"></script>
+  <script src="/assets/apexcharts.js"></script>
+  <script src="/assets/scripts.js"></script>
+</body>
+
 </html>

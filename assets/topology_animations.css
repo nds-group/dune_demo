@@ -4,17 +4,43 @@
     --green: #8ac926;
     --yellow: #ffca3a;
     --purple: #914aee;
-    --class-A: var(--red);
-    --class-B: var(--blue);
-    --class-C: var(--purple);
-    --class-D: var(--red);
-    --class-E: var(--blue);
-    --class-F: var(--purple);
+
+    --colors-1: #594b4a;
+    --colors-2: #536967;
+    --colors-3: #5b8175;
+    --colors-4: #5c9782;
+    --colors-5: #5eb591;
+    --colors-6: #68ceab;
+    --colors-7: #71ddb7;
+    --colors-8: #b0ead7;
+    --colors-9: #ceece2;
+    --colors-10: #deece6;
+
+    --colors-g-1: #20897d;
+    --colors-g-2: #36b28f;
+    --colors-g-3: #60e5a2;
+    --colors-g-4: #aefccc  ;
+    --colors-g-5: #aefceb;
+
+    --class-A: var(--colors-g-1);
+    --class-B: var(--colors-g-2);
+    --class-C: var(--colors-g-3);
+    --class-D: var(--colors-g-4);
+    --class-E: var(--colors-g-1);
+    --class-F: var(--colors-g-2);
+
+    --class-Other: var(--colors-gray-3);
+
+
+    --panel-bg-color: #262D47;
+    --colors-gray-1: #40475D;
+    --colors-gray-2: #9fa0a3;
+    --colors-gray-3: #808080;
  }
 
  body {
     font-family: sans-serif;
-    background-color: #262d47;
+    background-color: var(--panel-bg-color);
     overflow: hidden;
  }
 
@@ -51,20 +77,24 @@
  }
 
  .packet.classified-A {
-    fill: var(--red);
+    fill: var(--class-A);
  }
 
  .packet.classified-B {
-    fill: var(--blue);
+    fill: var(--class-B);
  }
 
  .packet.classified-C {
-    fill: var(--purple);
+    fill: var(--class-C);
  }
 
  .packet.classified-D {
-    fill: var(--yellow);
+    fill: var(--class-D);
  }
+
+ .packet.classified-other {
+  fill: var(--class-Other);
+}
 
  #svg-definitions {
     position: absolute;

@@ -1,12 +1,11 @@
-
 body {
-  background: #1B213B;
+  background: #fff;
   color: #777;
   font-family: Montserrat, Arial, sans-serif;
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden; /* Prevent scrolling */
+  overflow: hidden;
 }
 
 #wrapper {
@@ -20,7 +19,13 @@ body {
   background: #F3F4FA !important;
 }
 
-h1, h2, h3, h4, h5, h6, strong {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
   font-weight: 600;
 }
 
@@ -30,24 +35,23 @@ h1, h2, h3, h4, h5, h6, strong {
 }
 
 .content-area {
-  /* max-width: 1280px;
-  margin: 0 auto; */
   flex: 1;
   display: flex;
   flex-direction: column;
+  margin: .5em 0;
+  gap: .5em;
 }
 
-.container-fluid {
+.content-area {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-left: 5vw;
-  padding-right: 5vw;
+  padding-left: 3vw;
+  padding-right: 3vw;
 }
 
 .box {
-  background-color: #262D47;
-  /* padding: 25px 25px; */
+  background-color: var(--panel-bg-color);
   border-radius: 4px;
   flex: 1;
   overflow: hidden;
@@ -59,6 +63,7 @@ h1, h2, h3, h4, h5, h6, strong {
 .columnbox {
   padding-right: 15px;
 }
+
 .radialbox {
   max-height: 333px;
   margin-bottom: 60px;
@@ -70,18 +75,38 @@ h1, h2, h3, h4, h5, h6, strong {
 }
 
 .main {
-  /* margin-top: -30px; */
   flex: 1;
   display: grid;
-  grid-template-rows: 1fr 1fr auto;
-  padding: -0.1rem; /* spacing around the entire grid */
   overflow: hidden;
- }
+  gap: 1em;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: .4fr .6fr;
+}
 
 .row {
   flex: 1;
   display: flex;
   flex-wrap: nowrap;
+}
+
+div.row:nth-child(1) .panel {
+  height: 25vh;
+}
+
+div.row:nth-child(2) .panel {
+  height: 50vh
+}
+
+.panel {
+  overflow: hidden;
+  background-color: var(--panel-bg-color);
+  border-radius: 6px;
+}
+
+.panel div#frame {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 .col-md-6 {
@@ -92,7 +117,6 @@ h1, h2, h3, h4, h5, h6, strong {
 
 iframe {
   height: 100%;
-  max-height: 40vh;
 }
 
 .d-fixed {
@@ -100,22 +124,26 @@ iframe {
   padding-bottom: 0 !important;
 }
 
-.logos-left, .logos-right {
+.logos-left,
+.logos-right {
   display: flex;
   align-items: center;
 }
 
 .logos-left {
-  justify-content: flex-start; /* Align logos to the left */
+  justify-content: flex-start;
 }
 
 .logos-right {
-  justify-content: flex-end; /* Align logos to the right */
+  justify-content: flex-end;
 }
 
-.IMDEA-logo img, .EU img, .SNS-6G img, .Madrid-logo img {
+.IMDEA-logo img,
+.EU img,
+.SNS-6G img,
+.Madrid-logo img {
   height: auto;
-  margin: 0 8px;  /* Space between logos */
+  margin: 0 8px;
   margin-top: -1px;
 }
 
@@ -129,9 +157,9 @@ iframe {
 
 .chart-title {
   text-align: center;
-  font-size: 18px;
+  font-size: 21px;
   font-weight: bold;
-  color: #f9f6f7; /* Same red tone as your fill color */
+  color: #f9f6f7;
   margin: 0 0 15px 0;
   font-family: 'Helvetica Neue', sans-serif;
 }
@@ -140,7 +168,6 @@ iframe {
   display: none;
 }
 
-/* styles both buttons */
 #toggleUpdate {
   padding: 12px 24px;
   background: linear-gradient(to right, #141354, #36368b);
@@ -159,32 +186,24 @@ iframe {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
 
-.active-button {
-  /* background-color: #a21232;
-  color: white; */
-  padding: 12px 24px;
-  background: linear-gradient(to right, #19d029, #a5e568);
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-
 .default-button {
   padding: 12px 24px;
-  background: linear-gradient(to right, #057734, #388d4d);
-  color: white;
+  background: linear-gradient(to right, var(--colors-g-2), var(--colors-g-3));
+  color: #000;
   font-weight: bold;
   border: none;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   font-size: 16px;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out, color none;
+  width: 100%;
+  text-align: center
+}
+
+.active-button {
+  background: var(--colors-g-1);
+  color: white;
 }
 
 .default-button:hover {
@@ -198,13 +217,12 @@ iframe {
 }
 
 .button-label {
-  color: rgba(255, 255, 255, 0.693);
+  color: var(--colors-1);
   font-size: 0.85rem;
   margin-bottom: 5px;
 }
 
 #frame {
-  resize: both;
   overflow: auto;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
@@ -213,35 +231,64 @@ iframe {
 
 #frame:hover {
   /*transform: scale(1.2);*/
-  z-index: 1000; /* bring to front */
+  z-index: 1000;
+  /* bring to front */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
-#footer {
-  margin: 10px 0;
-  padding: 0 5vw;
+
+.footer {
+  display: flex;
+  justify-content: space-between;
 }
-#footer div img {
+
+.footer div img {
   width: auto;
   min-height: 6vh;
   height: 4em;
+  margin: 0;
 }
+
 #header {
   display: flex;
-  justify-content: right;
-  padding: 1em;
+  justify-content: space-between;
+  align-items: start;
+  gap: 1em;
 }
-#header div {
+
+#header .title {
+  display: flex;
+  gap: 1em;
+}
+
+#header .title h1 {
+  color: var(--colors-g-1);
+  font-size: 2.1em;
+}
+
+#header .title h1>span {
+  font-weight: 900;
+}
+
+#header .title .header-logo {
+  height: 3em;
+}
+
+#header .title .header-logo>img {
+  height: 100%;
+}
+
+#header .experiments-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+}
+
+#header .experiments-nav div {
   display: flex;
   flex-direction: column;
   justify-content: start;
 }
-.panel {
-  height: 40vh !important;
-  overflow: hidden;
-}
-.panel div#frame {
-  overflow: hidden;
-}
+
 .latency-charts {
   display: flex;
   flex-direction: column;
@@ -249,10 +296,52 @@ iframe {
   height: 100%;
   max-height: 35vh;
 }
+
 div#linechart {
-    margin: auto;
-    height: 100%;
+  margin: auto;
+  height: 100%;
 }
+
 div#linechart .apexcharts-canvas {
   margin: auto;
+}
+
+.footer .logos {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.footer .copyright {
+  text-align: center;
+}
+
+.footer .copyright p {
+  margin-bottom: 0;
+  font-size: .8em;
+}
+
+.footer .copyright .github-icon {
+  min-height: 18px !important;
+  height: 18px !important;
+  filter: invert(100%);
+}
+
+.footer .github-link {
+  background-color: #505050;
+  height: 20px;
+  font-size: .7em;
+  color: #fff;
+  text-decoration: none;
+  padding: 1px 1em;
+  border-radius: 4px;
+  margin-top: 3px;
+}
+
+.footer .links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: .5em;
+  ;
 }

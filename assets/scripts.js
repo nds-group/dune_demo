@@ -5,12 +5,8 @@ window.Apex = {
       show: false
     },
   },
-  colors: ['#FCCF31', '#17ead9', '#f02fc2'],
   stroke: {
     width: 3
-  },
-  dataLabels: {
-    enabled: false
   },
   grid: {
     borderColor: "#40475D",
@@ -33,7 +29,7 @@ window.Apex = {
     theme: 'dark',
     x: {
       formatter: function (val) {
-        return moment(new Date(val)).format("HH:mm:ss")
+        return moment(new Date(val)).format("H:mm:ss")
       }
     }
   },
@@ -41,27 +37,23 @@ window.Apex = {
     decimalsInFloat: 2,
     opposite: true,
     labels: {
-      // offsetX: -10
+      style: {
+        fontSize: '15px',
+      },
     }
   }
 };
 
+chart_time_length = 2 //mins
+
 // MACRO F1 
 
-function chartHeight() {
+function chartHeight(height = 25) {
   const windowHeight = window.innerHeight;
   let chartHeight;
   let btnMargin;
 
-  if (windowHeight < 600) { //small screens
-    btnMargin = 15;
-  } else if (windowHeight < 900) { // medium screens
-    btnMargin = 25;
-  } else { // big screens
-    btnMargin = 40;
-  }
-
-  chartHeight = windowHeight / 3 - btnMargin;
+  chartHeight = 6.4 * height + 80; // relation to get aspect ratio followin display size
   if (chartHeight < 200) { // minimum height
     chartHeight = 200;
   }
@@ -69,12 +61,13 @@ function chartHeight() {
   return chartHeight;
 }
 
+let instantaneousLineColor = 'var(--colors-g-5)';
+let overallLineColor = 'var(--colors-g-1)';
 
 var optionsLine = {
   chart: {
-    height: chartHeight() + 30,
+    height: chartHeight() + 10,
     type: 'line',
-    // stacked: false,
     animations: {
       enabled: true,
       easing: 'linear',
@@ -83,7 +76,7 @@ var optionsLine = {
       }
     },
     dropShadow: {
-      enabled: true,
+      enabled: false,
       opacity: 0.6,
       blur: 5,
       left: -7,
@@ -117,59 +110,73 @@ var optionsLine = {
   },
   series: [{
     name: 'Dune_Instantaneous',
-    color: '#e1eacd',
+    color: instantaneousLineColor,
     yAxisIndex: 0,
     data: []
   }, {
     name: 'Dune_Overall',
-    color: '#0b8457',
+    color: overallLineColor,
     yAxisIndex: 0,
     data: []
   }, {
     name: 'Jewel_Instantaneous',
-    color: '#e1eacd',
+    color: instantaneousLineColor,
     yAxisIndex: 0,
     data: []
   }, {
     name: 'Jewel_Overall',
-    color: '#0b8457',
+    color: overallLineColor,
     yAxisIndex: 0,
     data: []
   }, {
     name: 'Mousika_Instantaneous',
-    color: '#e1eacd',
+    color: instantaneousLineColor,
     yAxisIndex: 0,
     data: []
   }, {
     name: 'Mousika_Overall',
-    color: '#0b8457',
+    color: overallLineColor,
     yAxisIndex: 0,
     data: []
   }
   ],
   xaxis: {
     type: 'datetime',
-    range: 20 * 60 * 1000, // 20 minutes in milliseconds
+    range: chart_time_length * 60 * 1000, // chart_time_length minutes in milliseconds
     labels: {
       style: {
-        fontSize: '1.2vh',
+        fontSize: '1.4vh',
+      },
+      datetimeFormatter: {
+        hour: 'HH:mm',
+        minute: 'H:mm:ss',
+        second: 'H:mm:ss',
       },
     },
-  },
-  title: {
-    text: 'Macro F1-Score',
-    align: 'center',
-    style: {
-      fontSize: '18px'
-    }
-  },
-  subtitle: {
-    floating: true,
-    align: 'right',
-    offsetY: 0,
-    style: {
-      fontSize: '22px'
-    }
+    title: {
+      text: 'Time',
+      style: {
+        color: 'var(--colors-10)',
+        fontSize: '15px'
+      },
+      offsetY: 15
+    },
+    axisBorder: {
+      show: true,
+      color: 'var(--colors-10)',
+      height: 1,
+      width: '100%',
+      offsetX: 0,
+      offsetY: 0
+    },
+    axisTicks: {
+      show: true,
+      borderType: 'solid',
+      color: 'var(--colors-10)',
+      height: 6,
+      offsetX: 0,
+      offsetY: 0
+    },
   },
   legend: {
     show: true,
@@ -180,16 +187,26 @@ var optionsLine = {
     offsetX: -5,
     customLegendItems: ['Overall', 'Instantaneous'],
     markers: {
-      fillColors: ['#0b8457', '#e1eacd'] // Match your 'Overall' and 'Instantaneous' colors
-    }
+      fillColors: [overallLineColor, instantaneousLineColor] // Match your 'Overall' and 'Instantaneous' colors
+    },
+    fontSize: '16px'
+
   },
   yaxis: {
     min: 0,
     max: 1,
     labels: {
       style: {
-        fontSize: '1.2vh',
+        fontSize: '15px',
       },
+    },
+    title: {
+      text: 'Score',
+      style: {
+        color: 'var(--colors-10)',
+        fontSize: '15px'
+      },
+      offsetX: -2
     },
   },
   fill: {
@@ -209,62 +226,107 @@ chartLine.render()
 var optionsCombinedPerf = {
   chart: {
     type: 'bar',
-    height: chartHeight(),
+    height: chartHeight(50),
     stacked: false,
+    animations: {
+      enabled: true,
+      speed: 1,
+      animateGradually: {
+        enabled: false,
+        delay: 10
+      },
+      dynamicAnimation: {
+        enabled: true,
+        speed: 1,
+        easing: 'linear'
+      }
+    }
   },
   plotOptions: {
     bar: {
       horizontal: true,
       barHeight: '70%',
       dataLabels: {
-        position: 'right'
+        position: 'bottom',
       }
     }
   },
-  colors: ['#0b8457', '#10316b', '#eac100'], // Macro, Weighted, Micro
+  colors: ['var(--colors-g-1)', 'var(--colors-g-3)', 'var(--colors-g-4)'], // Macro, Weighted, Micro
   series: [
     {
       name: 'Macro F1 Score',
-      data: [null, null, null, null] // No Inf, Mousika, Jewel, Dune
+      data: [null, null, null] // Mousika, Jewel, Dune
     },
     {
       name: 'Weighted F1 Score',
-      data: [null, null, null, null]
+      data: [null, null, null]
     },
     {
       name: 'Micro F1 Score',
-      data: [null, null, null, null]
+      data: [null, null, null]
     }
   ],
   xaxis: {
     min: 0.3,
     max: 1,
-    categories: ['No Inference', 'Mousika', 'Jewel', 'Dune'],
+    categories: ['Mousika', 'Jewel', 'Dune'],
     title: {
       text: 'Score',
       style: {
-        color: '#ccc'
+        color: 'var(--colors-10)',
+        fontSize: '15px'
       }
     },
     labels: {
-      enabled: false
-    }
+      enabled: false,
+      style: {
+        fontSize: '15px',
+      },
+    },
+    axisBorder: {
+      show: true,
+      color: 'var(--colors-10)',
+      height: 1,
+      width: '100%',
+      offsetX: 0,
+      offsetY: 0
+    },
+    axisTicks: {
+      show: true,
+      borderType: 'solid',
+      color: 'var(--colors-10)',
+      height: 6,
+      offsetX: 0,
+      offsetY: 0
+    },
   },
   yaxis: {
     labels: {
       style: {
         color: '#fff',
         fontWeight: 600,
-        fontSize: '1.2vh'
+        fontSize: '15px',
+
       }
     }
   },
   dataLabels: {
-    offsetY: 6,
+    offsetY: 0,
+    textAnchor: 'end',
+    offsetX: 0,
+
     enabled: true,
     style: {
-      fontSize: '1vh',
-      colors: ['#fff'],
+      fontSize: '16px',
+      fontWeight: 'bold',
+      colors: ['var(--colors-10)'],
+    },
+    background: {
+      enabled: true,
+      foreColor: '#000',
+      padding: 3,
+      borderRadius: 2,
+      opacity: 0.3,
     },
     formatter: (val) => (val == null ? '' : val.toFixed(3)),
   },
@@ -282,15 +344,16 @@ var optionsCombinedPerf = {
     show: true,
     position: 'bottom',
     offsetY: 10,
+    fontSize: '16px',
     labels: {
-      colors: ['#ccc']
+      colors: ['var(--colors-10)']
     },
     markers: {
       shape: 'circle'
     }
   },
   grid: {
-    show: false
+    show: false,
   },
   fill: {
     type: 'solid'
@@ -303,7 +366,7 @@ chartCombinedPerf.render();
 
 var optionsnoInference = {
   chart: {
-    height: chartHeight() / 4,
+    height: chartHeight(50) / 4,
     type: 'bar',
     stacked: true,
     sparkline: {
@@ -315,7 +378,7 @@ var optionsnoInference = {
       horizontal: true,
       barHeight: '40%',
       colors: {
-        backgroundBarColors: ['#40475D']
+        backgroundBarColors: ['var(--colors-gray-2)']
       }
     },
   },
@@ -330,14 +393,17 @@ var optionsnoInference = {
     floating: true,
     offsetX: -10,
     offsetY: 5,
-    text: 'No Inference'
+    text: 'No Inference',
+    style: {
+      fontSize: '16px',
+    }
   },
   subtitle: {
     floating: true,
     align: 'right',
     offsetY: 15,
     style: {
-      fontSize: '1.5vh'
+      fontSize: '16px'
     }
   },
   tooltip: {
@@ -351,7 +417,7 @@ var optionsnoInference = {
   },
   fill: {
     type: 'solid',
-    colors: ['#a21232']
+    colors: ['var(--colors-g-1)']
   }
 }
 var chartnoInference = new ApexCharts(document.querySelector('#noInference'), optionsnoInference);
@@ -360,7 +426,7 @@ chartnoInference.render();
 
 var optionsMousika = {
   chart: {
-    height: chartHeight() / 4,
+    height: chartHeight(50) / 4,
     type: 'bar',
     stacked: true,
     sparkline: {
@@ -372,11 +438,10 @@ var optionsMousika = {
       horizontal: true,
       barHeight: '40%',
       colors: {
-        backgroundBarColors: ['#40475D']
+        backgroundBarColors: ['var(--colors-gray-2)']
       }
     },
   },
-  colors: ['#17ead9'],
   stroke: {
     width: 0,
   },
@@ -388,14 +453,17 @@ var optionsMousika = {
     floating: true,
     offsetX: -10,
     offsetY: 5,
-    text: 'Mousika'
+    text: 'Mousika',
+    style: {
+      fontSize: '16px',
+    }
   },
   subtitle: {
     floating: true,
     align: 'right',
     offsetY: 15,
     style: {
-      fontSize: '1.5vh'
+      fontSize: '16px'
     }
   },
   tooltip: {
@@ -409,7 +477,7 @@ var optionsMousika = {
   },
   fill: {
     type: 'solid',
-    colors: ['#a21232']
+    colors: ['var(--colors-g-1)']
   }
 }
 var chartMousika = new ApexCharts(document.querySelector('#Mousika'), optionsMousika);
@@ -418,7 +486,7 @@ chartMousika.render();
 
 var optionsJewel = {
   chart: {
-    height: chartHeight() / 4,
+    height: chartHeight(50) / 4,
     type: 'bar',
     stacked: true,
     sparkline: {
@@ -430,11 +498,10 @@ var optionsJewel = {
       horizontal: true,
       barHeight: '40%',
       colors: {
-        backgroundBarColors: ['#40475D']
+        backgroundBarColors: ['var(--colors-gray-2)']
       }
     },
   },
-  colors: ['#f02fc2'],
   stroke: {
     width: 0,
   },
@@ -444,20 +511,23 @@ var optionsJewel = {
   }],
   fill: {
     type: 'solid',
-    colors: ['#a21232']
+    colors: ['var(--colors-g-1)']
   },
   title: {
     floating: true,
     offsetX: -10,
     offsetY: 5,
-    text: 'Jewel'
+    text: 'Jewel',
+    style: {
+      fontSize: '16px',
+    }
   },
   subtitle: {
     floating: true,
     align: 'right',
     offsetY: 15,
     style: {
-      fontSize: '1.5vh'
+      fontSize: '16px'
     }
   },
   tooltip: {
@@ -475,7 +545,7 @@ chartJewel.render();
 
 var optionsDune = {
   chart: {
-    height: chartHeight() / 4 + 10,
+    height: chartHeight(50) / 4,
     type: 'bar',
     stacked: true,
     sparkline: {
@@ -487,11 +557,10 @@ var optionsDune = {
       horizontal: true,
       barHeight: '40%',
       colors: {
-        backgroundBarColors: ['#40475D']
+        backgroundBarColors: ['var(--colors-gray-2)']
       }
     },
   },
-  colors: ['#f02fc2'],
   stroke: {
     width: 0,
   },
@@ -501,7 +570,7 @@ var optionsDune = {
   }],
   fill: {
     type: 'solid',
-    colors: ['#a21232']
+    colors: ['var(--colors-g-1)']
   },
   title: {
     floating: true,
@@ -563,13 +632,13 @@ window.duneIndex = 0;
 window.state_demo = 0; // 0: idle, 1: demo running
 
 function showAnimation(htmlFile) {
-  console.log('showAnimation', htmlFile);
   const frame = document.getElementById('animation-frame');
 
 
   if (frame) {
 
     if (frame.dataset.htmlFile && frame.dataset.htmlFile === htmlFile) {
+      // window.isAnimationPaused var used to control the animation from the external files
       window.isAnimationPaused = !window.isAnimationPaused;
       return; // No need to change if it's the same file
     }
@@ -596,6 +665,10 @@ function stopChartUpdate() {
     clearInterval(window.intervalId);
     window.intervalId = null;
   }
+  if (window.perfIntervalId) {
+    clearInterval(window.perfIntervalId);
+    window.perfIntervalId = null;
+  }
   window.state_demo = 0;
 
   // Reset button styles
@@ -609,15 +682,11 @@ function stopChartUpdate() {
   buttons.forEach(btnInfo => {
     const button = document.getElementById(btnInfo.id);
     if (button) {
-      // button.textContent = btnInfo.text; // Keep original text or update if needed
       button.classList.remove('active-button');
-      button.classList.add('default-button');
     }
   });
 
-  //showAnimation(''); // Hide animation frame
   window.currentUpdater = null;
-  console.log("Chart update stopped. Current updater:", window.currentUpdater);
 }
 
 function toggleChartUpdate(updaterName) {
@@ -631,9 +700,13 @@ function toggleChartUpdate(updaterName) {
 
   window.currentUpdater = updaterName;
   window.state_demo = 1; // Set demo state to running
-  console.log("Starting chart update for:", window.currentUpdater);
 
   let animationHtml = '';
+  const speedMultiplier = 4;
+  const baseInterval = 1000;
+  const updateInterval = baseInterval / speedMultiplier;
+  const perfUpdateInterval = updateInterval * 4; // Slower interval for chartCombinedPerf
+
   let dataIndexRef = null; // To pass by reference effectively
   let latencyData = null;
   let perfData = null;
@@ -644,15 +717,22 @@ function toggleChartUpdate(updaterName) {
   const toggleButton = document.getElementById(`toggle${updaterName.charAt(0).toUpperCase() + updaterName.slice(1)}`);
   if (toggleButton) {
     toggleButton.classList.add('active-button');
-    toggleButton.classList.remove('default-button');
   }
 
 
+  const combinedPerfSeries = {
+    'mousika': 0,
+    'jewel': 1,
+    'dune': 2
+  }
   switch (updaterName) {
     case 'noInference':
       animationHtml = 'assets/data/no_inference_animation.html';
       latencyData = window.noInferenceLatencyData;
-      dataIndexRef = { get: () => window.noInferenceIndex, set: (val) => window.noInferenceIndex = val };
+      dataIndexRef = {
+        get: () => window.noInferenceIndex,
+        set: (val) => window.noInferenceIndex = val
+      };
       chartToUpdate = chartnoInference;
       // No performance data for noInference in this structure
       break;
@@ -669,9 +749,9 @@ function toggleChartUpdate(updaterName) {
         { data: [{ x: now.getTime(), y: null }] }, { data: [{ x: now.getTime(), y: null }] }
       ];
       performanceUpdateFunction = (macro, weighted, micro) => [
-        { name: 'Macro F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[0].data, 2, macro.toFixed(3)) },
-        { name: 'Weighted F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[1].data, 2, weighted.toFixed(3)) },
-        { name: 'Micro F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[2].data, 2, micro.toFixed(3)) }
+        { name: 'Macro F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[0].data, combinedPerfSeries[updaterName], macro.toFixed(3)) },
+        { name: 'Weighted F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[1].data, combinedPerfSeries[updaterName], weighted.toFixed(3)) },
+        { name: 'Micro F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[2].data, combinedPerfSeries[updaterName], micro.toFixed(3)) }
       ];
       break;
     case 'dune':
@@ -687,9 +767,9 @@ function toggleChartUpdate(updaterName) {
         { data: [{ x: now.getTime(), y: null }] }, { data: [{ x: now.getTime(), y: null }] }
       ];
       performanceUpdateFunction = (macro, weighted, micro) => [
-        { name: 'Macro F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[0].data, 3, macro.toFixed(3)) },
-        { name: 'Weighted F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[1].data, 3, weighted.toFixed(3)) },
-        { name: 'Micro F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[2].data, 3, micro.toFixed(3)) }
+        { name: 'Macro F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[0].data, combinedPerfSeries[updaterName], macro.toFixed(3)) },
+        { name: 'Weighted F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[1].data, combinedPerfSeries[updaterName], weighted.toFixed(3)) },
+        { name: 'Micro F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[2].data, combinedPerfSeries[updaterName], micro.toFixed(3)) }
       ];
       break;
     case 'mousika':
@@ -705,9 +785,9 @@ function toggleChartUpdate(updaterName) {
         { data: [{ x: now.getTime(), y: parseFloat(macro_overall.toFixed(3)) }] }
       ];
       performanceUpdateFunction = (macro, weighted, micro) => [
-        { name: 'Macro F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[0].data, 1, macro.toFixed(3)) },
-        { name: 'Weighted F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[1].data, 1, weighted.toFixed(3)) },
-        { name: 'Micro F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[2].data, 1, micro.toFixed(3)) }
+        { name: 'Macro F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[0].data, combinedPerfSeries[updaterName], macro.toFixed(3)) },
+        { name: 'Weighted F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[1].data, combinedPerfSeries[updaterName], weighted.toFixed(3)) },
+        { name: 'Micro F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[2].data, combinedPerfSeries[updaterName], micro.toFixed(3)) }
       ];
       break;
     default:
@@ -720,18 +800,16 @@ function toggleChartUpdate(updaterName) {
 
   window.intervalId = setInterval(() => {
     let currentIndex = dataIndexRef.get();
-    const dataLength = perfData ? perfData['macro_overall'].length : (latencyData ? latencyData.length : 0);
-    const noInfLengthLimit = 60; // Specific limit for noInference
+    // Determine dataLength based on perfData primarily, fallback to latencyData if perfData is not available for the current updater.
+    const dataLength = (perfData && perfData['macro_overall']) ? perfData['macro_overall'].length : (latencyData ? latencyData.length : 0);
 
-    if (updaterName === 'noInference' && currentIndex >= noInfLengthLimit) {
-      showAnimation('');
-      stopChartUpdate();
+    if (dataLength === 0) { // If there's no data, don't proceed
       return;
-    } else if (updaterName !== 'noInference' && currentIndex >= dataLength) {
-      dataIndexRef.set(0); // Reset index for looping, or stop
-      showAnimation('');
-      stopChartUpdate();
-      return;
+    }
+
+   if (currentIndex >= dataLength - 1) {
+      currentIndex = 0; // Loop back
+      dataIndexRef.set(currentIndex);
     }
 
     const now = new Date();
@@ -744,23 +822,49 @@ function toggleChartUpdate(updaterName) {
       });
     }
 
-    if (perfData && chartSeriesDataFunction && performanceUpdateFunction) {
+    if (perfData && chartSeriesDataFunction) {
       const macro_overall = perfData['macro_overall'][currentIndex];
       const macro_inst = perfData['macro_inst'][currentIndex];
-      const weighted_overall = perfData['weighted_overall'][currentIndex];
-      const micro_overall = perfData['micro_overall'][currentIndex];
 
       chartLine.appendData(chartSeriesDataFunction(now, macro_inst, macro_overall));
       chartLine.updateOptions({
-        xaxis: { min: now.getTime() - (20 * 60 * 1000), max: now.getTime() }
+        xaxis: { min: now.getTime() - (chart_time_length * 60 * 1000), max: now.getTime() }
       }, false, false);
-
-      chartCombinedPerf.updateSeries(performanceUpdateFunction(macro_overall, weighted_overall, micro_overall));
     }
 
-    dataIndexRef.set(currentIndex + 1);
+    let nextIndex = currentIndex + 1;
+    if (nextIndex >= dataLength) {
+      nextIndex = 0; // Loop back
+    }
+    dataIndexRef.set(nextIndex);
 
-  }, 1000);
+  }, updateInterval);
+
+  if (perfData && performanceUpdateFunction) {
+    window.perfIntervalId = setInterval(() => {
+      if (window.currentUpdater !== updaterName) { // Stop if the updater changed
+        clearInterval(window.perfIntervalId);
+        window.perfIntervalId = null;
+        return;
+      }
+
+      let currentIndexForPerf = dataIndexRef.get();
+      const dataLength = perfData['macro_overall'].length;
+      if (dataLength === 0) return;
+
+      // Use the previous index for the perf chart to reflect the data point just processed by the main loop
+      currentIndexForPerf = (currentIndexForPerf === 0) ? (dataLength > 0 ? dataLength - 1 : 0) : currentIndexForPerf - 1;
+      if (currentIndexForPerf < 0 && dataLength > 0) currentIndexForPerf = 0; // Ensure it's a valid index
+
+      const macro_overall_perf = perfData['macro_overall'][currentIndexForPerf];
+      const weighted_overall_perf = perfData['weighted_overall'][currentIndexForPerf];
+      const micro_overall_perf = perfData['micro_overall'][currentIndexForPerf];
+
+      chartCombinedPerf.updateSeries(
+        performanceUpdateFunction(macro_overall_perf, weighted_overall_perf, micro_overall_perf),
+        true);
+    }, perfUpdateInterval);
+  }
 }
 
 
@@ -783,24 +887,19 @@ async function initializeApp() {
   window.jewelPerfData = await fetchJsonData('assets/data/ToN_5min_jewel.json', 'Error loading Jewel Perf JSON:');
   window.dunePerfData = await fetchJsonData('assets/data/ToN_5min_dune.json', 'Error loading Dune Perf JSON:');
 
-
-  console.log("Data fetching complete.");
-
   // Setup event listeners once
   document.getElementById('toggleNoInference')?.addEventListener('click', () => toggleChartUpdate('noInference'));
   document.getElementById('toggleJewel')?.addEventListener('click', () => toggleChartUpdate('jewel'));
   document.getElementById('toggleDune')?.addEventListener('click', () => toggleChartUpdate('dune'));
   document.getElementById('toggleMousika')?.addEventListener('click', () => toggleChartUpdate('mousika'));
-  console.log("Event listeners attached.");
-
+  
   // Start the idle chart update interval
   setInterval(function () {
-    // console.log("Periodic check. Current state_demo:", window.state_demo, "Current updater:", window.currentUpdater);
     if (window.state_demo === 0) { // Only update if idle
       const now = new Date();
       chartLine.updateOptions({
         xaxis: {
-          min: now.getTime() - (20 * 60 * 1000), // 20 min ago
+          min: now.getTime() - (chart_time_length * 60 * 1000), // 20 min ago
           max: now.getTime()
         }
       }, false, false);
