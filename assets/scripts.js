@@ -742,10 +742,10 @@ function toggleChartUpdate(updaterName) {
       perfData = window.jewelPerfData;
       dataIndexRef = { get: () => window.jewelIndex, set: (val) => window.jewelIndex = val };
       chartToUpdate = chartJewel;
-      chartSeriesDataFunction = (now, macro_inst, macro_overall) => [
+      chartSeriesDataFunction = (now, micro_inst, micro_overall) => [
         { data: [{ x: now.getTime(), y: null }] }, { data: [{ x: now.getTime(), y: null }] },
-        { data: [{ x: now.getTime(), y: parseFloat(macro_inst.toFixed(3)) }] },
-        { data: [{ x: now.getTime(), y: parseFloat(macro_overall.toFixed(3)) }] },
+        { data: [{ x: now.getTime(), y: parseFloat(micro_inst.toFixed(3)) }] },
+        { data: [{ x: now.getTime(), y: parseFloat(micro_overall.toFixed(3)) }] },
         { data: [{ x: now.getTime(), y: null }] }, { data: [{ x: now.getTime(), y: null }] }
       ];
       performanceUpdateFunction = (macro, weighted, micro) => [
@@ -760,9 +760,9 @@ function toggleChartUpdate(updaterName) {
       perfData = window.dunePerfData;
       dataIndexRef = { get: () => window.duneIndex, set: (val) => window.duneIndex = val };
       chartToUpdate = chartDune;
-      chartSeriesDataFunction = (now, macro_inst, macro_overall) => [
-        { data: [{ x: now.getTime(), y: parseFloat(macro_inst.toFixed(3)) }] },
-        { data: [{ x: now.getTime(), y: parseFloat(macro_overall.toFixed(3)) }] },
+      chartSeriesDataFunction = (now, micro_inst, micro_overall) => [
+        { data: [{ x: now.getTime(), y: parseFloat(micro_inst.toFixed(3)) }] },
+        { data: [{ x: now.getTime(), y: parseFloat(micro_overall.toFixed(3)) }] },
         { data: [{ x: now.getTime(), y: null }] }, { data: [{ x: now.getTime(), y: null }] },
         { data: [{ x: now.getTime(), y: null }] }, { data: [{ x: now.getTime(), y: null }] }
       ];
@@ -778,11 +778,11 @@ function toggleChartUpdate(updaterName) {
       perfData = window.mousikaPerfData;
       dataIndexRef = { get: () => window.mousikaIndex, set: (val) => window.mousikaIndex = val };
       chartToUpdate = chartMousika;
-      chartSeriesDataFunction = (now, macro_inst, macro_overall) => [
+      chartSeriesDataFunction = (now, micro_inst, micro_overall) => [
         { data: [{ x: now.getTime(), y: null }] }, { data: [{ x: now.getTime(), y: null }] },
         { data: [{ x: now.getTime(), y: null }] }, { data: [{ x: now.getTime(), y: null }] },
-        { data: [{ x: now.getTime(), y: parseFloat(macro_inst.toFixed(3)) }] },
-        { data: [{ x: now.getTime(), y: parseFloat(macro_overall.toFixed(3)) }] }
+        { data: [{ x: now.getTime(), y: parseFloat(micro_inst.toFixed(3)) }] },
+        { data: [{ x: now.getTime(), y: parseFloat(micro_overall.toFixed(3)) }] }
       ];
       performanceUpdateFunction = (macro, weighted, micro) => [
         { name: 'Macro F1', data: updateValueAtIndex(chartCombinedPerf.w.config.series[0].data, combinedPerfSeries[updaterName], macro.toFixed(3)) },
@@ -823,10 +823,10 @@ function toggleChartUpdate(updaterName) {
     }
 
     if (perfData && chartSeriesDataFunction) {
-      const macro_overall = perfData['macro_overall'][currentIndex];
-      const macro_inst = perfData['macro_inst'][currentIndex];
+      const micro_inst = perfData['micro_inst'][currentIndex];
+      const micro_overall = perfData['micro_overall'][currentIndex];
 
-      chartLine.appendData(chartSeriesDataFunction(now, macro_inst, macro_overall));
+      chartLine.appendData(chartSeriesDataFunction(now, micro_inst, micro_overall));
       chartLine.updateOptions({
         xaxis: { min: now.getTime() - (chart_time_length * 60 * 1000), max: now.getTime() }
       }, false, false);
