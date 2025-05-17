@@ -51,9 +51,8 @@ chart_time_length = 2 //mins
 function chartHeight(height = 25) {
   const windowHeight = window.innerHeight;
   let chartHeight;
-  let btnMargin;
 
-  chartHeight = 6.4 * height + 120; // relation to get aspect ratio followin display size
+  chartHeight = 6.4 * height + windowHeight/10; // relation to get aspect ratio followin display size
   if (chartHeight < 200) { // minimum height
     chartHeight = 200;
   }
