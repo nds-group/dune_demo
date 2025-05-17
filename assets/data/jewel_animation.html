@@ -299,26 +299,26 @@
          const packetLayer = document.getElementById('packet-layer');
          const NS = "http://www.w3.org/2000/svg";
 
-         const packetClasses = ['A', 'B', 'C'];
+         const packetClasses = ['A', 'C', 'E'];
          const packetDistributionConfig = {
             'A': 40,
-            'B': 30,
             'C': 30,
+            'E': 30,
          };
 
          const animationDuration = 12000; // ms
          const minInterval = 800;   // ms
          const maxInterval = 1400;  // ms
-         const packetHeight = 12;
-         const minPacketWidth = 12;
-         const maxPacketWidth = 20;
+         const packetHeight = 16;
+         const minPacketWidth = 20;
+         const maxPacketWidth = 26;
          const inferenceOffsetY = -30;
          const forwardOffsetY = 30;
 
          const classificationCounts = {
             'A': 0,
-            'B': 0,
-            'C': 0
+            'C': 0,
+            'E': 0
          };
 
          const switchEntryAndExit = {
@@ -329,8 +329,8 @@
 
          const classToTableLabel = {
             'A': 'tableA',
-            'B': 'tableB',
-            'C': 'tableC'
+            'C': 'tableB',
+            'E': 'tableC'
          };
 
          const classifyThreshold = 4;
@@ -345,8 +345,8 @@
                },
                classificationSwitch: 'switch-a'
             },
-            'B': {
-               colorClass: 'classified-B',
+            'C': {
+               colorClass: 'classified-C',
                classifyThreshold: classifyThreshold,
                behavior: {
                   'switch-a': { action: 'inference' },
@@ -355,8 +355,8 @@
                },
                classificationSwitch: 'switch-a'
             },
-            'C': {
-               colorClass: 'classified-C',
+            'E': {
+               colorClass: 'classified-E',
                classifyThreshold: classifyThreshold,
                behavior: {
                   'switch-a': { action: 'inference' },
@@ -467,8 +467,19 @@
             packetGroup.dataset.previousSwitchId = 'none';
             packetGroup.dataset.committedOffsetY = 0;
 
+            // const packetLabel = document.createElementNS(NS,'text');
+            // packetLabel.textContent = packetClass;
+            // packetLabel.setAttribute('dy', '.3em');
+            // packetLabel.setAttribute('text-anchor', 'middle');
+            // packetLabel.setAttribute('font-size', '10px');
+            // packetLabel.setAttribute('font-family', 'Arial, sans-serif');
+            // packetLabel.setAttribute('fill', 'black');
+
+
             // Estruct: g > rect
             packetGroup.appendChild(packetRect);
+            // packetGroup.appendChild(packetLabel);
+
             packetLayer.appendChild(packetGroup);
             // --- End creating group ---
 

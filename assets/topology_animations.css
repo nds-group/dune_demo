@@ -19,15 +19,28 @@
     --colors-g-1: #20897d;
     --colors-g-2: #36b28f;
     --colors-g-3: #60e5a2;
-    --colors-g-4: #aefccc  ;
+    --colors-g-4: #aefccc;
     --colors-g-5: #aefceb;
+
+    --colors-b-1: #3756a6;
+    --colors-b-2: #5872ac;
+    --colors-b-3: #738ab8;
+    --colors-b-4: #8ca4c9  ;
+    --colors-b-5: #a1bed1;
+
+    --colors-g-1: #1A8578; /* Verde azulado muy oscuro */
+    --colors-g-2: #20897d; /* Verde azulado oscuro */
+    --colors-g-3: #27C8AB; /* Verde azulado medio brillante */
+    --colors-g-4: #60E5C8; /* Verde azulado claro */
+    --colors-g-5: #95F0DA; /* Verde azulado muy claro */
+    --colors-g-6: #CAF7ED; /* Verde azulado extremadamente claro / Pastel */
 
     --class-A: var(--colors-g-1);
     --class-B: var(--colors-g-2);
     --class-C: var(--colors-g-3);
     --class-D: var(--colors-g-4);
-    --class-E: var(--colors-g-1);
-    --class-F: var(--colors-g-2);
+    --class-E: var(--colors-g-5);
+    --class-F: var(--colors-g-6);
 
     --class-Other: var(--colors-gray-3);
 
@@ -92,6 +105,15 @@
     fill: var(--class-D);
  }
 
+
+ .packet.classified-E {
+    fill: var(--class-E);
+ }
+
+
+ .packet.classified-F {
+    fill: var(--class-F);
+ }
  .packet.classified-other {
   fill: var(--class-Other);
 }

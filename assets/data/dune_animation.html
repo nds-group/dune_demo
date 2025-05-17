@@ -93,17 +93,37 @@
 
                <g id="g7" inkscape:label="simpleSwitch">
                   <rect style="opacity:0.860725;fill:#b3b3b3;stroke:#000;stroke-width:3.0164;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.890196;paint-order:fill markers stroke" id="rect3" x="629.01556" rx="4.4060531" ry="8.2601871" inkscape:label="switchContainer" height="150" width="200" y="150"></rect>
+               
                   
-                  
-                  
-                  <rect style="opacity:0.860725;fill:var(--colors-8);stroke:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dashoffset:2;stroke-opacity:0.890196;paint-order:fill markers stroke;
+                  <defs> 
+                     <linearGradient x1="0%" y1="0%" x2="100%" y2="0%" id="inferenceGradient0"> 
+                        <stop offset="0%" style="stop-color:var(--inference-color-0, transparent);stop-opacity:.8"></stop> 
+                        <stop style="stop-color:var(--inference-color-0, transparent);stop-opacity:1" offset="30%"></stop> 
+                     </linearGradient>
+
+                     <linearGradient x1="0%" y1="0%" x2="100%" y2="0%" id="inferenceGradient1"> 
+                        <stop offset="0%" style="stop-color:var(--inference-color-1, transparent);stop-opacity:.8"></stop> 
+                        <stop style="stop-color:var(--inference-color-1, transparent);stop-opacity:1" offset="30%"></stop> 
+                     </linearGradient> 
+                  </defs>
+
+                  <rect style="opacity:0.860725;fill:var(--colors-10);stroke:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dashoffset:2;stroke-opacity:0.890196;paint-order:fill markers stroke;
                      display:var(--show-inference, inline);
-                     stroke:var(--inference-color,none)" id="rect4" width="140" x="660" rx="4" ry="4" inkscape:label="inferenceBlock" height="45" y="170"></rect>
-                  <text xml:space="preserve" id="text7-3" inkscape:label="inferenceLabel" y="190" style="font-family:arial;-inkscape-font-specification:arial;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;opacity:0.860725;fill:#ffcc00;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.581339;paint-order:fill markers stroke;
-                     display:var(--show-inference, inline);" x="685">
+                     stroke:none" id="rect4" width="140" x="660" rx="4" ry="4" inkscape:label="inferenceBlock" height="45" y="170"></rect>
+                  
+                  <rect style="opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.331272, 0.993814;stroke-dashoffset:0.331272;stroke-opacity:0.890196;paint-order:fill markers stroke;
+                     fill: url(#inferenceGradient0);" id="inference-output-0" class="table-rect-common" rx="1.029658" ry="0.4263173" height="15" x="750" width="50" y="170"></rect>
+
+                  <rect style="opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.331272, 0.993814;stroke-dashoffset:0.331272;stroke-opacity:0.890196;paint-order:fill markers stroke;
+                     fill: url(#inferenceGradient1);" id="inference-output-1" class="table-rect-common" rx="1.029658" ry="0.4263173" width="50" x="750" height="15" y="200"></rect>
+                  
+
+                  <text xml:space="preserve" id="text7-3" inkscape:label="inferenceLabel" y="190" style="font-family:arial;-inkscape-font-specification:arial;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;opacity:0.860725;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.581339;paint-order:fill markers stroke;" x="685">
                      <tspan sodipodi:role="line" id="tspan7-6" x="685" y="198" style="font-size:23px;fill:#000000">Inference</tspan>
                   </text>
-                  <rect style="opacity:0.860725;fill:var(--colors-10);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.890196;paint-order:fill markers stroke" id="rect5" width="140" x="660" rx="4" ry="4" inkscape:label="forwardBlock" height="45" y="235"></rect>
+                  <rect style="opacity:0.860725;fill:var(--colors-10);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.890196;paint-order:fill markers stroke" id="rect5" width="140" x="660" rx="4" ry="4" 
+                     inkscape:label="forwardBlock" height="45" y="235">
+                  </rect>
                   <text xml:space="preserve" style="font-size:21.3333px;font-family:arial;-inkscape-font-specification:arial;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;opacity:0.860725;fill:#ffcc00;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.581339;paint-order:fill markers stroke" x="692.9364" id="text7" inkscape:label="forwardLabel" y="240">
                      <tspan sodipodi:role="line" id="tspan7" x="690" y="265" style="font-size:23px;fill:#000000">Forward</tspan>
                   </text><rect style="opacity:0.860725;stroke:none;stroke-width:0.331272;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.331272, 0.993814;stroke-dashoffset:0.331272;stroke-opacity:0.890196;paint-order:fill markers stroke;
@@ -238,7 +258,8 @@
             <g id="switch-a" transform="matrix(0.99992533,0,0,0.99992533,49.997341,39.998601)">
                <!-- Instance label -->
                <use xlink:href="#g10" id="switchA" transform="translate(-663.1128,-119.64015)"
-                  style="--inference-color:var(--class-A);" inkscape:label="switchA" />
+                  style="--inference-color-0:var(--class-A); --inference-color-1:var(--class-D);"
+                  inkscape:label="switchA" />
                <text x="63.743423" y="10.844433" text-anchor="middle" font-family="Arial, sans-serif" font-size="18px"
                   fill="#dddddd" id="switch-label-a" data-name="Switch A" style="font-size:18px">Switch A</text>
             </g>
@@ -248,7 +269,8 @@
                <text x="89.619743" y="-15.099602" text-anchor="middle" font-family="Arial, sans-serif" font-size="18px"
                   fill="#dddddd" id="switch-label-b" data-name="Switch B" style="font-size:18px">Switch B</text>
                <use xlink:href="#g10" id="switchB" transform="translate(-637.56464,-145.5899)"
-                  style="--inference-color:var(--class-B);" inkscape:label="switchB" />
+                  style="--inference-color-0:var(--class-B); --inference-color-1:var(--class-E);"
+                  inkscape:label="switchB" />
             </g>
             <!-- Instance Switch C -->
             <g id="switch-c" transform="translate(570,65.942477)">
@@ -256,7 +278,8 @@
                <text x="77.726685" y="-15.099602" text-anchor="middle" font-family="Arial, sans-serif" font-size="18px"
                   fill="#dddddd" id="switch-label-c" data-name="Switch C" style="font-size:18px">Switch C</text>
                <use xlink:href="#g10" id="switchC" transform="translate(-649.37566,-145.5899)"
-                  style="--inference-color:var(--class-C);" inkscape:label="swithcC" />
+                  style="--inference-color-0:var(--class-C); --inference-color-1:var(--class-F);"
+                  inkscape:label="swithcC" />
             </g>
          </g>
          <g inkscape:groupmode="layer" id="layer1" inkscape:label="Cable layer" transform="translate(41.931325,3.8892291)">
@@ -297,9 +320,9 @@
          const animationDuration = 12000; // ms
          const minInterval = 800;   // ms
          const maxInterval = 1400;  // ms
-         const packetHeight = 12;
-         const minPacketWidth = 12;
-         const maxPacketWidth = 25;
+         const packetHeight = 16;
+         const minPacketWidth = 20;
+         const maxPacketWidth = 26;
          const inferenceOffsetY = -30;
          const forwardOffsetY = 30;
 
@@ -380,7 +403,7 @@
                packetWidth: minPacketWidth,
             },
             'D': {
-               colorClass: 'classified-A',
+               colorClass: 'classified-D',
                classifyThreshold: classifyThreshold,
                behavior: {
                   'switch-a': { action: 'inference' },
@@ -391,7 +414,7 @@
                packetWidth: maxPacketWidth,
             },
             'E': {
-               colorClass: 'classified-B',
+               colorClass: 'classified-E',
                classifyThreshold: classifyThreshold,
                behavior: {
                   'switch-a': { action: 'inference' },
@@ -402,7 +425,7 @@
                packetWidth: maxPacketWidth,
             },
             'F': {
-               colorClass: 'classified-C',
+               colorClass: 'classified-F',
                classifyThreshold: classifyThreshold,
                behavior: {
                   'switch-a': { action: 'inference' },
@@ -505,7 +528,7 @@
 
             const packetRect = document.createElementNS(NS, 'rect');
             const randomWidth = config.packetWidth
-
+           
             packetRect.setAttribute('class', 'packet');
             packetRect.setAttribute('width', randomWidth);
             packetRect.setAttribute('height', packetHeight);
@@ -519,8 +542,17 @@
             packetGroup.dataset.previousSwitchId = 'none';
             packetGroup.dataset.committedOffsetY = 0;
 
+            // const packetLabel = document.createElementNS(NS,'text');
+            // packetLabel.textContent = packetClass;  
+            // packetLabel.setAttribute('dy', '.3em');
+            // packetLabel.setAttribute('text-anchor', 'middle');
+            // packetLabel.setAttribute('font-size', '10px');
+            // packetLabel.setAttribute('font-family', 'Arial, sans-serif');
+            // packetLabel.setAttribute('fill', 'black');
+            
             // Estruct: g > rect
             packetGroup.appendChild(packetRect);
+            // packetGroup.appendChild(packetLabel);
             packetLayer.appendChild(packetGroup);
             // --- End creating group ---
 
