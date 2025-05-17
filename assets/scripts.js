@@ -53,7 +53,7 @@ function chartHeight(height = 25) {
   let chartHeight;
   let btnMargin;
 
-  chartHeight = 6.4 * height + 80; // relation to get aspect ratio followin display size
+  chartHeight = 6.4 * height + 120; // relation to get aspect ratio followin display size
   if (chartHeight < 200) { // minimum height
     chartHeight = 200;
   }
@@ -66,7 +66,7 @@ let overallLineColor = 'var(--colors-g-1)';
 
 var optionsLine = {
   chart: {
-    height: chartHeight() + 10,
+    height: chartHeight(),
     type: 'line',
     animations: {
       enabled: true,
@@ -142,13 +142,16 @@ var optionsLine = {
   ],
   xaxis: {
     type: 'datetime',
+    tickAmount: 5,
+    tickPlacement: 'between',
     range: chart_time_length * 60 * 1000, // chart_time_length minutes in milliseconds
     labels: {
       style: {
-        fontSize: '1.4vh',
+        fontSize: '1.3vh',
+
       },
       datetimeFormatter: {
-        hour: 'HH:mm',
+        hour: 'H:mm',
         minute: 'H:mm:ss',
         second: 'H:mm:ss',
       },
@@ -173,7 +176,7 @@ var optionsLine = {
       show: true,
       borderType: 'solid',
       color: 'var(--colors-10)',
-      height: 6,
+      height: 10,
       offsetX: 0,
       offsetY: 0
     },
@@ -633,25 +636,36 @@ window.state_demo = 0; // 0: idle, 1: demo running
 
 function showAnimation(htmlFile) {
   const frame = document.getElementById('animation-frame');
-
-
   if (frame) {
 
+    resumeAnimation();
+
     if (frame.dataset.htmlFile && frame.dataset.htmlFile === htmlFile) {
-      // window.isAnimationPaused var used to control the animation from the external files
-      window.isAnimationPaused = !window.isAnimationPaused;
-      return; // No need to change if it's the same file
+      return;
     }
 
     frame.dataset.htmlFile = htmlFile;
     frame.src = htmlFile;
-    // Ensure parent is visible if it was hidden
-    if (frame) {
-      frame.style.display = htmlFile ? 'block' : 'none';
-    }
+    
   } else {
     console.error('Animation frame not found');
   }
+}
+
+function pauseAnimation() {
+  const frame = document.getElementById('animation-frame');
+  if (frame) {
+    frame.style.display = 'none';
+  }
+  window.isAnimationPaused = true;
+}
+
+function resumeAnimation() {
+  const frame = document.getElementById('animation-frame');
+  if (frame) {
+    frame.style.display = 'block';
+  }
+  window.isAnimationPaused = false;
 }
 
 function updateValueAtIndex(arr, index, value) {
@@ -691,8 +705,9 @@ function stopChartUpdate() {
 
 function toggleChartUpdate(updaterName) {
   if (window.currentUpdater === updaterName) {
-    window.isAnimationPaused = true; // Pause animation if already running
+    pauseAnimation();
     stopChartUpdate();
+
     return;
   }
 
