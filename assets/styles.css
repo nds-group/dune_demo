@@ -258,6 +258,7 @@ iframe {
 #header .title {
   display: flex;
   gap: 1em;
+  margin: auto 0;
 }
 
 #header .title h1 {
