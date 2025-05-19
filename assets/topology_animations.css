@@ -28,11 +28,11 @@
     --colors-b-4: #8ca4c9  ;
     --colors-b-5: #a1bed1;
 
-    --colors-g-1: #1A8578; /* Verde azulado muy oscuro */
-    --colors-g-2: #20897d; /* Verde azulado oscuro */
-    --colors-g-3: #27C8AB; /* Verde azulado medio brillante */
-    --colors-g-4: #60E5C8; /* Verde azulado claro */
-    --colors-g-5: #95F0DA; /* Verde azulado muy claro */
+    --colors-g-1: #006e6a; /* Verde azulado muy oscuro */
+    --colors-g-2: #33e0c9; /* Verde azulado oscuro */
+    --colors-g-3: #00c6c3; /* Verde azulado medio brillante */
+    --colors-g-4: #1caa9e; /* Verde azulado claro */
+    --colors-g-5: #0a9052; /* Verde azulado muy claro */
     --colors-g-6: #CAF7ED; /* Verde azulado extremadamente claro / Pastel */
 
     --class-A: var(--colors-g-1);

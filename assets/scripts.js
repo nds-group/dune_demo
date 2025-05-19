@@ -60,7 +60,7 @@ function chartHeight(height = 25) {
   return chartHeight;
 }
 
-let instantaneousLineColor = 'var(--colors-g-5)';
+let instantaneousLineColor = 'var(--colors-g-6)';
 let overallLineColor = 'var(--colors-g-1)';
 
 var optionsLine = {
