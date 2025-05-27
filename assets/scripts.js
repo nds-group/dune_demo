@@ -741,7 +741,7 @@ function toggleChartUpdate(updaterName) {
   }
   switch (updaterName) {
     case 'noInference':
-      animationHtml = 'assets/data/no_inference_animation.html';
+      animationHtml = './assets/data/no_inference_animation.html';
       latencyData = window.noInferenceLatencyData;
       dataIndexRef = {
         get: () => window.noInferenceIndex,
@@ -751,7 +751,7 @@ function toggleChartUpdate(updaterName) {
       // No performance data for noInference in this structure
       break;
     case 'jewel':
-      animationHtml = 'assets/data/jewel_animation.html';
+      animationHtml = './assets/data/jewel_animation.html';
       latencyData = window.jewelLatencyData;
       perfData = window.jewelPerfData;
       dataIndexRef = { get: () => window.jewelIndex, set: (val) => window.jewelIndex = val };
@@ -769,7 +769,7 @@ function toggleChartUpdate(updaterName) {
       ];
       break;
     case 'dune':
-      animationHtml = 'assets/data/dune_animation.html';
+      animationHtml = './assets/data/dune_animation.html';
       latencyData = window.duneLatencyData;
       perfData = window.dunePerfData;
       dataIndexRef = { get: () => window.duneIndex, set: (val) => window.duneIndex = val };
@@ -787,7 +787,7 @@ function toggleChartUpdate(updaterName) {
       ];
       break;
     case 'mousika':
-      animationHtml = 'assets/data/mousika_animation.html';
+      animationHtml = './assets/data/mousika_animation.html';
       latencyData = window.mousikaLatencyData;
       perfData = window.mousikaPerfData;
       dataIndexRef = { get: () => window.mousikaIndex, set: (val) => window.mousikaIndex = val };
@@ -885,21 +885,21 @@ function toggleChartUpdate(updaterName) {
 async function initializeApp() {
   console.log("Initializing application and fetching data...");
 
-  const noInfData = await fetchJsonData('assets/data/ToN_5min_latency_no_inference.json', 'Error loading No Inference Latency JSON:');
+  const noInfData = await fetchJsonData('./assets/data/ToN_5min_latency_no_inference.json', 'Error loading No Inference Latency JSON:');
   if (noInfData) window.noInferenceLatencyData = noInfData['latency'];
 
-  const mousikaLatData = await fetchJsonData('assets/data/ToN_5min_latency_mousika.json', 'Error loading Mousika Latency JSON:');
+  const mousikaLatData = await fetchJsonData('./assets/data/ToN_5min_latency_mousika.json', 'Error loading Mousika Latency JSON:');
   if (mousikaLatData) window.mousikaLatencyData = mousikaLatData['latency'];
 
-  const jewelLatData = await fetchJsonData('assets/data/ToN_5min_latency_jewel.json', 'Error loading Jewel Latency JSON:');
+  const jewelLatData = await fetchJsonData('./assets/data/ToN_5min_latency_jewel.json', 'Error loading Jewel Latency JSON:');
   if (jewelLatData) window.jewelLatencyData = jewelLatData['latency'];
 
-  const duneLatData = await fetchJsonData('assets/data/ToN_5min_latency_dune.json', 'Error loading Dune Latency JSON:');
+  const duneLatData = await fetchJsonData('./assets/data/ToN_5min_latency_dune.json', 'Error loading Dune Latency JSON:');
   if (duneLatData) window.duneLatencyData = duneLatData['latency'];
 
-  window.mousikaPerfData = await fetchJsonData('assets/data/ToN_5min_mousika.json', 'Error loading Mousika Perf JSON:');
-  window.jewelPerfData = await fetchJsonData('assets/data/ToN_5min_jewel.json', 'Error loading Jewel Perf JSON:');
-  window.dunePerfData = await fetchJsonData('assets/data/ToN_5min_dune.json', 'Error loading Dune Perf JSON:');
+  window.mousikaPerfData = await fetchJsonData('./assets/data/ToN_5min_mousika.json', 'Error loading Mousika Perf JSON:');
+  window.jewelPerfData = await fetchJsonData('./assets/data/ToN_5min_jewel.json', 'Error loading Jewel Perf JSON:');
+  window.dunePerfData = await fetchJsonData('./assets/data/ToN_5min_dune.json', 'Error loading Dune Perf JSON:');
 
   // Setup event listeners once
   document.getElementById('toggleNoInference')?.addEventListener('click', () => toggleChartUpdate('noInference'));
